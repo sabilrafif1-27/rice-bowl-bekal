@@ -727,12 +727,87 @@ select{
 
 }
 
+
+/* ==========================
+   UPLOAD FOTO MAKANAN
+========================== */
+
+.upload-box{
+    border:2px dashed #ddd;
+    border-radius:14px;
+    padding:15px;
+    margin-bottom:14px;
+    background:#fffaf5;
+}
+
+.upload-row{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.upload-input{
+    flex:1;
+    min-width:220px;
+}
+
+.upload-button{
+    border:none;
+    background:#ff6b35;
+    color:white;
+    padding:11px 14px;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.upload-button:disabled{
+    background:#aaa;
+    cursor:not-allowed;
+}
+
+.upload-status{
+    margin-top:9px;
+    color:#666;
+    font-size:13px;
+    line-height:1.4;
+}
+
+
+/* LOGIN ADMIN */
+.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:25px;background:linear-gradient(135deg,#ff6b35,#ff9f1c)}
+.login-card{width:100%;max-width:420px;background:white;border-radius:24px;padding:30px;box-shadow:0 15px 50px #0004}
+.login-card h1{font-size:28px;margin-bottom:8px}.login-card p{color:#777;line-height:1.5;margin-bottom:22px}
+.login-card label{display:block;font-weight:bold;margin-bottom:7px}.login-card input{width:100%;padding:13px;border:1px solid #ddd;border-radius:11px;margin-bottom:14px;font-family:Arial}
+.login-button{width:100%;border:none;background:#ff6b35;color:white;padding:14px;border-radius:12px;font-weight:bold;cursor:pointer}.login-button:disabled{background:#aaa;cursor:not-allowed}
+.login-error{display:none;margin-top:12px;padding:11px;border-radius:10px;background:#ffe8e8;color:#a52222;line-height:1.4}.login-error.show{display:block}
+#adminApp{display:none}.logout{border:none;background:#ffe5e5;color:#c62828;padding:10px 14px;border-radius:20px;font-weight:bold;cursor:pointer}.header-actions{display:flex;align-items:center;gap:10px}
+@media(max-width:650px){.header-actions{gap:6px}.header-actions .refresh,.header-actions .logout{padding:8px 10px;font-size:12px}}
 </style>
 
 </head>
 
 
 <body>
+
+<!-- LOGIN ADMIN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div style="font-size:55px; margin-bottom:10px;">🔐</div>
+    <h1>Admin Rice Bowl Bekal</h1>
+    <p>Silakan login untuk mengelola pesanan, stok, harga, dan menu.</p>
+    <form onsubmit="loginAdmin(event)">
+      <label for="loginEmail">Email</label>
+      <input id="loginEmail" type="email" placeholder="Email admin" autocomplete="username" required>
+      <label for="loginPassword">Password</label>
+      <input id="loginPassword" type="password" placeholder="Password admin" autocomplete="current-password" required>
+      <button class="login-button" id="loginButton" type="submit">🔐 Login</button>
+      <div class="login-error" id="loginError"></div>
+    </form>
+  </div>
+</div>
+<div id="adminApp">
 
 
 <header>
@@ -741,12 +816,10 @@ select{
         🍱 Admin Rice Bowl Bekal
     </div>
 
-    <button
-        class="refresh"
-        onclick="loadAll()"
-    >
-        🔄 Refresh
-    </button>
+    <div class="header-actions">
+        <button class="refresh" onclick="loadAll()">🔄 Refresh</button>
+        <button class="logout" onclick="logoutAdmin()">🚪 Logout</button>
+    </div>
 
 </header>
 
@@ -1042,15 +1115,44 @@ select{
                 placeholder="Contoh: 20"
             >
 
-            <label for="productImage">
-                Gambar
+            <label>
+                Foto Makanan
             </label>
+
+            <div class="upload-box">
+
+                <div class="upload-row">
+
+                    <input
+                        id="productImageFile"
+                        class="upload-input"
+                        type="file"
+                        accept="image/*"
+                    >
+
+                    <button
+                        type="button"
+                        class="upload-button"
+                        id="uploadImageButton"
+                        onclick="uploadProductImage()"
+                    >
+                        📷 Upload Foto
+                    </button>
+
+                </div>
+
+                <div
+                    class="upload-status"
+                    id="uploadStatus"
+                >
+                    Pilih foto makanan lalu klik Upload Foto.
+                </div>
+
+            </div>
 
             <input
                 id="productImage"
-                type="text"
-                placeholder="Contoh: ayam-geprek.png atau URL gambar"
-                oninput="previewProductImage()"
+                type="hidden"
             >
 
             <img
@@ -1104,6 +1206,39 @@ const database =
         SUPABASE_URL,
         SUPABASE_ANON_KEY
     );
+
+
+
+/* ADMIN AUTHENTICATION */
+async function loginAdmin(event){
+    event.preventDefault();
+    const email=document.getElementById("loginEmail").value.trim();
+    const password=document.getElementById("loginPassword").value;
+    const button=document.getElementById("loginButton");
+    const errorBox=document.getElementById("loginError");
+    errorBox.classList.remove("show"); errorBox.textContent="";
+    button.disabled=true; button.textContent="⏳ Login...";
+    const {error}=await database.auth.signInWithPassword({email,password});
+    if(error){
+        console.error(error); errorBox.textContent="❌ Login gagal: "+error.message; errorBox.classList.add("show");
+        button.disabled=false; button.textContent="🔐 Login"; return;
+    }
+    showAdminApp(); button.disabled=false; button.textContent="🔐 Login";
+}
+function showAdminApp(){document.getElementById("loginScreen").style.display="none";document.getElementById("adminApp").style.display="block";loadAll();}
+function showLoginScreen(){document.getElementById("adminApp").style.display="none";document.getElementById("loginScreen").style.display="flex";}
+async function logoutAdmin(){
+    if(!confirm("Yakin ingin logout dari admin?")) return;
+    const {error}=await database.auth.signOut();
+    if(error){alert("Gagal logout:\n"+error.message);return;}
+    showLoginScreen();
+}
+async function checkAdminSession(){
+    const {data,error}=await database.auth.getSession();
+    if(error){console.error(error);showLoginScreen();return;}
+    if(data.session) showAdminApp(); else showLoginScreen();
+}
+database.auth.onAuthStateChange(function(event,session){if(session) showAdminApp(); else showLoginScreen();});
 
 
 /* ==========================
@@ -1730,6 +1865,9 @@ function openProductModal(productId = null){
     document.getElementById("productPrice").value = "";
     document.getElementById("productStock").value = "";
     document.getElementById("productImage").value = "";
+    document.getElementById("productImageFile").value = "";
+    document.getElementById("uploadStatus").textContent =
+        "Pilih foto makanan lalu klik Upload Foto.";
 
     const preview =
         document.getElementById("productImagePreview");
@@ -1820,6 +1958,135 @@ function previewProductImage(){
         preview.classList.remove("show");
 
     };
+
+}
+
+
+
+async function uploadProductImage(){
+
+    const input =
+        document.getElementById("productImageFile");
+
+    const button =
+        document.getElementById("uploadImageButton");
+
+    const status =
+        document.getElementById("uploadStatus");
+
+    const preview =
+        document.getElementById("productImagePreview");
+
+    const file = input.files[0];
+
+    if(!file){
+
+        alert("Pilih foto makanan terlebih dahulu.");
+        return;
+
+    }
+
+    if(!file.type.startsWith("image/")){
+
+        alert("File harus berupa gambar.");
+        return;
+
+    }
+
+    // Batas 5 MB agar upload tetap ringan.
+    if(file.size > 5 * 1024 * 1024){
+
+        alert("Ukuran foto maksimal 5 MB.");
+        return;
+
+    }
+
+    button.disabled = true;
+    button.textContent = "⏳ Upload...";
+
+    status.textContent = "Sedang mengupload foto...";
+
+    try{
+
+        const extension =
+            file.name.split(".").pop().toLowerCase();
+
+        const safeExtension =
+            extension.replace(/[^a-z0-9]/g, "") || "jpg";
+
+        const filePath =
+            "menu-" +
+            Date.now() +
+            "-" +
+            Math.random()
+                .toString(36)
+                .substring(2,8) +
+            "." +
+            safeExtension;
+
+        const {
+            error:uploadError
+        } =
+            await database
+            .storage
+            .from("product-images")
+            .upload(
+                filePath,
+                file,
+                {
+                    cacheControl:"3600",
+                    upsert:false,
+                    contentType:file.type
+                }
+            );
+
+        if(uploadError)
+            throw uploadError;
+
+        const {
+            data:urlData
+        } =
+            database
+            .storage
+            .from("product-images")
+            .getPublicUrl(filePath);
+
+        const publicUrl =
+            urlData.publicUrl;
+
+        document.getElementById(
+            "productImage"
+        ).value = publicUrl;
+
+        preview.src = publicUrl;
+        preview.classList.add("show");
+
+        status.textContent =
+            "✅ Foto berhasil diupload.";
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        status.textContent =
+            "❌ Upload gagal.";
+
+        alert(
+            "Gagal upload foto:\n\n" +
+            error.message +
+            "\n\nPastikan Storage bucket 'product-images' sudah dibuat dan policy upload-nya sudah diatur."
+        );
+
+    }
+
+    finally{
+
+        button.disabled = false;
+        button.textContent = "📷 Upload Foto";
+
+    }
 
 }
 
@@ -2457,7 +2724,7 @@ function escapeHTML(text){
    START
 ========================== */
 
-loadAll();
+checkAdminSession();
 
 </script>
 
