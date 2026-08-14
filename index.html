@@ -2,56 +2,1501 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Rice Bowl Bekal</title>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#fff8ef;color:#382018}
-header{position:sticky;top:0;z-index:5;background:#ff6b35;color:#fff;padding:16px 6%;display:flex;justify-content:space-between;align-items:center;box-shadow:0 3px 12px #0002}
-.logo{font-size:22px;font-weight:800}.cart{border:0;background:#fff;color:#e95725;padding:10px 16px;border-radius:25px;font-weight:700;cursor:pointer}
-.hero{background:linear-gradient(135deg,#ff6b35,#ff9f1c);color:white;padding:55px 7%;display:flex;justify-content:space-between;align-items:center;gap:25px}.hero h1{font-size:42px;margin-bottom:15px}.hero p{font-size:17px;line-height:1.6}.emoji{font-size:100px}
-.menu{padding:45px 7%}.title{text-align:center;margin-bottom:30px}.title h2{font-size:30px}.title p{color:#777;margin-top:7px}
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;max-width:1100px;margin:auto}.card{background:white;border-radius:22px;overflow:hidden;box-shadow:0 7px 25px #0002}.photo{height:280px;background:#ffe2bc}.photo img{width:100%;height:100%;object-fit:cover}.info{padding:20px}.info h3{font-size:22px;margin-bottom:8px}.desc{color:#777;line-height:1.5;font-size:14px}.price{color:#f4511e;font-size:22px;font-weight:800;margin-top:13px}.stock{margin-top:7px;color:#555}.add{width:100%;border:0;background:#ff6b35;color:#fff;padding:13px;border-radius:12px;margin-top:15px;font-weight:700;cursor:pointer}.add:disabled{background:#aaa}
-.drawer{position:fixed;right:-420px;top:0;width:390px;max-width:100%;height:100vh;background:#fff;z-index:10;padding:25px;box-shadow:-7px 0 25px #0003;transition:.3s;overflow:auto}.drawer.open{right:0}.head{display:flex;justify-content:space-between;margin-bottom:20px}.close{border:0;background:none;font-size:30px;cursor:pointer}.item{padding:15px 0;border-bottom:1px solid #eee}.qty{display:flex;gap:12px;align-items:center;margin-top:8px}.qty button{border:0;background:#ff6b35;color:#fff;border-radius:50%;width:28px;height:28px}.total{font-size:21px;font-weight:800;margin-top:20px}.form{margin-top:20px}.form input,.form textarea{width:100%;padding:12px;margin-bottom:10px;border:1px solid #ddd;border-radius:10px}.wa{width:100%;padding:14px;border:0;border-radius:12px;background:#25d366;color:#fff;font-weight:800}
-footer{background:#382018;color:#fff;text-align:center;padding:25px;margin-top:30px}@media(max-width:650px){.hero{flex-direction:column;text-align:center}.hero h1{font-size:32px}.drawer{width:100%}}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#fff8ef;
+    color:#382018;
+}
+
+/* HEADER */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:10;
+
+    background:#ff6b35;
+    color:white;
+
+    padding:16px 6%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    box-shadow:0 3px 12px #0002;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.cart-button{
+    border:none;
+    background:white;
+    color:#e95725;
+
+    padding:10px 16px;
+
+    border-radius:25px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+    background:linear-gradient(
+        135deg,
+        #ff6b35,
+        #ff9f1c
+    );
+
+    color:white;
+
+    padding:55px 7%;
+
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    gap:30px;
+}
+
+.hero-text{
+    max-width:600px;
+}
+
+.hero h1{
+    font-size:43px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:17px;
+    line-height:1.6;
+}
+
+.hero-icon{
+    font-size:100px;
+}
+
+/* MENU */
+
+.menu{
+    padding:45px 7%;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.title h2{
+    font-size:30px;
+}
+
+.title p{
+    color:#777;
+    margin-top:8px;
+}
+
+.products{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap:25px;
+
+    max-width:1100px;
+
+    margin:auto;
+}
+
+/* CARD */
+
+.card{
+    background:white;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 7px 25px #0002;
+}
+
+.photo{
+    height:280px;
+
+    background:#ffe2bc;
+}
+
+.photo img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+.info{
+    padding:20px;
+}
+
+.info h3{
+    font-size:22px;
+    margin-bottom:8px;
+}
+
+.desc{
+    color:#777;
+    line-height:1.5;
+
+    font-size:14px;
+}
+
+.price{
+    color:#f4511e;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    margin-top:13px;
+}
+
+.stock{
+    margin-top:8px;
+
+    color:#555;
+}
+
+.add-button{
+    width:100%;
+
+    border:none;
+
+    background:#ff6b35;
+
+    color:white;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    margin-top:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.add-button:disabled{
+    background:#aaa;
+
+    cursor:not-allowed;
+}
+
+/* CART */
+
+.cart{
+    position:fixed;
+
+    right:-430px;
+    top:0;
+
+    width:400px;
+    max-width:100%;
+
+    height:100vh;
+
+    background:white;
+
+    z-index:20;
+
+    padding:25px;
+
+    box-shadow:
+    -7px 0 25px #0003;
+
+    transition:.3s;
+
+    overflow:auto;
+}
+
+.cart.open{
+    right:0;
+}
+
+.cart-header{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+}
+
+.close-button{
+    border:none;
+
+    background:none;
+
+    font-size:30px;
+
+    cursor:pointer;
+}
+
+.cart-item{
+    padding:15px 0;
+
+    border-bottom:
+    1px solid #eee;
+}
+
+.quantity{
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-top:10px;
+}
+
+.quantity button{
+    border:none;
+
+    background:#ff6b35;
+
+    color:white;
+
+    border-radius:50%;
+
+    width:30px;
+    height:30px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+.total{
+    font-size:21px;
+
+    font-weight:bold;
+
+    margin-top:20px;
+}
+
+/* FORM */
+
+.order-form{
+    margin-top:25px;
+}
+
+.order-form h3{
+    margin-bottom:15px;
+}
+
+.order-form input,
+.order-form textarea{
+    width:100%;
+
+    padding:12px;
+
+    border:
+    1px solid #ddd;
+
+    border-radius:10px;
+
+    margin-bottom:10px;
+
+    font-family:Arial;
+}
+
+.order-button{
+    width:100%;
+
+    border:none;
+
+    background:#25d366;
+
+    color:white;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.order-button:disabled{
+    background:#aaa;
+}
+
+.message{
+    margin-top:12px;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    display:none;
+
+    line-height:1.5;
+}
+
+.success{
+    display:block;
+
+    background:#e9f9ed;
+
+    color:#176b2c;
+}
+
+.error{
+    display:block;
+
+    background:#ffe8e8;
+
+    color:#a52222;
+}
+
+/* LOADING */
+
+.loading{
+    text-align:center;
+
+    padding:40px;
+
+    color:#777;
+}
+
+/* FOOTER */
+
+footer{
+    background:#382018;
+
+    color:white;
+
+    text-align:center;
+
+    padding:25px;
+
+    margin-top:30px;
+}
+
+/* MOBILE */
+
+@media(max-width:650px){
+
+    .hero{
+        flex-direction:column;
+
+        text-align:center;
+
+        padding:40px 6%;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .hero-icon{
+        font-size:75px;
+    }
+
+    .cart{
+        width:100%;
+    }
+
+}
+
 </style>
+
 </head>
+
 <body>
-<header><div class="logo">🍱 Rice Bowl Bekal</div><button class="cart" onclick="openCart()">🛒 Keranjang (<span id="count">0</span>)</button></header>
-<section class="hero"><div><h1>Bekal Enak untuk Hari Sekolah!</h1><p>Pesan rice bowl praktis untuk bekal sekolah.</p></div><div class="emoji">🍱</div></section>
-<section class="menu"><div class="title"><h2>Menu Hari Ini</h2><p>Stok diperbarui langsung dari database.</p></div><div class="products" id="products"><p>Memuat menu...</p></div></section>
 
-<div class="drawer" id="drawer"><div class="head"><h2>🛒 Keranjang</h2><button class="close" onclick="closeCart()">×</button></div><div id="items"><p>Keranjang kosong.</p></div><div class="total">Total: <span id="total">Rp0</span></div><div class="form"><input id="name" placeholder="Nama pembeli"><input id="className" placeholder="Kelas"><textarea id="note" rows="3" placeholder="Catatan"></textarea><button class="wa" onclick="sendWA()">📱 Pesan lewat WhatsApp</button></div></div>
 
-<footer>© 2026 Rice Bowl Bekal ❤️</footer>
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+        🍱 Rice Bowl Bekal
+    </div>
+
+    <button
+        class="cart-button"
+        onclick="openCart()"
+    >
+
+        🛒 Keranjang
+
+        (<span id="cartCount">0</span>)
+
+    </button>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <h1>
+            Bekal Enak untuk Hari Sekolah!
+        </h1>
+
+        <p>
+            Rice bowl praktis dan lezat
+            untuk menemani aktivitas sekolah.
+        </p>
+
+    </div>
+
+    <div class="hero-icon">
+        🍱
+    </div>
+
+</section>
+
+
+<!-- MENU -->
+
+<section class="menu">
+
+    <div class="title">
+
+        <h2>
+            Menu Hari Ini
+        </h2>
+
+        <p>
+            Stok diperbarui langsung.
+        </p>
+
+    </div>
+
+
+    <div
+        class="products"
+        id="products"
+    >
+
+        <div class="loading">
+            Memuat menu...
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CART -->
+
+<div
+    class="cart"
+    id="cart"
+>
+
+    <div class="cart-header">
+
+        <h2>
+            🛒 Keranjang
+        </h2>
+
+        <button
+            class="close-button"
+            onclick="closeCart()"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div id="cartItems">
+
+        <p>
+            Keranjang masih kosong.
+        </p>
+
+    </div>
+
+
+    <div class="total">
+
+        Total:
+
+        <span id="total">
+            Rp0
+        </span>
+
+    </div>
+
+
+    <!-- FORM PESANAN -->
+
+    <div class="order-form">
+
+        <h3>
+            Data Pesanan
+        </h3>
+
+
+        <input
+            id="customerName"
+            type="text"
+            placeholder="Nama pembeli"
+        >
+
+
+        <input
+            id="customerClass"
+            type="text"
+            placeholder="Kelas"
+        >
+
+
+        <textarea
+            id="note"
+            rows="3"
+            placeholder="Catatan pesanan"
+        ></textarea>
+
+
+        <button
+            class="order-button"
+            id="orderButton"
+            onclick="createOrder()"
+        >
+
+            📱 Pesan Sekarang
+
+        </button>
+
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 Rice Bowl Bekal
+    </p>
+
+    <p style="margin-top:6px;">
+        Bekal enak untuk sekolah ❤️
+    </p>
+
+</footer>
+
+
+<!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="config.js"></script>
+
+
 <script>
-const db=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-let products=[],cart=[];
+
+
+/* ==========================
+   SUPABASE
+========================== */
+
+const database =
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+
+/* ==========================
+   DATA
+========================== */
+
+let products = [];
+
+let cart = [];
+
+
+/* ==========================
+   LOAD PRODUCTS
+========================== */
+
 async function loadProducts(){
- const {data,error}=await db.from("products").select("*").eq("active",true).order("id");
- if(error){document.getElementById("products").innerHTML="<p>Database belum terhubung. Isi config.js terlebih dahulu.</p>";console.error(error);return}
- products=data; renderProducts();
+
+    const container =
+        document.getElementById("products");
+
+
+    container.innerHTML =
+        `<div class="loading">
+            Memuat menu...
+        </div>`;
+
+
+    const { data, error } =
+        await database
+        .from("products")
+        .select("*")
+        .eq("active", true)
+        .order("id");
+
+
+    if(error){
+
+        console.error(error);
+
+        container.innerHTML =
+            `<div class="loading">
+                ❌ Gagal mengambil menu.
+                <br><br>
+                Coba refresh halaman.
+            </div>`;
+
+        return;
+
+    }
+
+
+    products = data || [];
+
+
+    renderProducts();
+
 }
+
+
+/* ==========================
+   DISPLAY PRODUCTS
+========================== */
+
 function renderProducts(){
- const box=document.getElementById("products");
- box.innerHTML=products.map(p=>`
- <div class="card"><div class="photo"><img src="${p.image||'ayam-suwir.png'}" alt="${p.name}"></div>
- <div class="info"><h3>${p.name}</h3><p class="desc">${p.description||''}</p>
- <div class="price">Rp${Number(p.price).toLocaleString("id-ID")}</div>
- <div class="stock">Stok: <b>${p.stock}</b></div>
- <button class="add" ${p.stock<=0?'disabled':''} onclick="add(${p.id})">${p.stock<=0?'HABIS':'+ Tambah ke Keranjang'}</button>
- </div></div>`).join("");
+
+    const container =
+        document.getElementById("products");
+
+
+    if(products.length === 0){
+
+        container.innerHTML =
+            `<div class="loading">
+                Belum ada menu.
+            </div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        products.map(product => {
+
+            const stock =
+                Number(product.stock);
+
+
+            return `
+
+                <div class="card">
+
+                    <div class="photo">
+
+                        <img
+                            src="${product.image || "ayam-suwir.png"}"
+                            alt="${escapeHTML(product.name)}"
+                        >
+
+                    </div>
+
+
+                    <div class="info">
+
+                        <h3>
+                            ${escapeHTML(product.name)}
+                        </h3>
+
+
+                        <p class="desc">
+
+                            ${escapeHTML(
+                                product.description || ""
+                            )}
+
+                        </p>
+
+
+                        <div class="price">
+
+                            Rp${Number(
+                                product.price
+                            ).toLocaleString("id-ID")}
+
+                        </div>
+
+
+                        <div class="stock">
+
+                            Stok:
+                            <b>
+                                ${stock}
+                            </b>
+
+                        </div>
+
+
+                        <button
+                            class="add-button"
+                            ${stock <= 0 ? "disabled" : ""}
+                            onclick="addToCart(${product.id})"
+                        >
+
+                            ${
+                                stock <= 0
+                                ? "HABIS"
+                                : "+ Tambah ke Keranjang"
+                            }
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
 }
-function add(id){let p=products.find(x=>x.id===id);let c=cart.find(x=>x.id===id);if(!p||p.stock<=0)return;if(c)c.qty++;else cart.push({id:p.id,name:p.name,price:p.price,qty:1});p.stock--;renderProducts();renderCart()}
-function plus(i){let c=cart[i],p=products.find(x=>x.id===c.id);if(!p||p.stock<=0)return alert("Stok habis.");c.qty++;p.stock--;renderProducts();renderCart()}
-function minus(i){let c=cart[i],p=products.find(x=>x.id===c.id);c.qty--;p.stock++;if(c.qty<=0)cart.splice(i,1);renderProducts();renderCart()}
-function renderCart(){document.getElementById("count").textContent=cart.reduce((s,x)=>s+x.qty,0);let box=document.getElementById("items");if(!cart.length){box.innerHTML="<p>Keranjang kosong.</p>";document.getElementById("total").textContent="Rp0";return}box.innerHTML=cart.map((x,i)=>`<div class="item"><b>${x.name}</b><p>Rp${Number(x.price).toLocaleString("id-ID")}</p><div class="qty"><button onclick="minus(${i})">−</button><b>${x.qty}</b><button onclick="plus(${i})">+</button></div></div>`).join("");document.getElementById("total").textContent="Rp"+cart.reduce((s,x)=>s+x.price*x.qty,0).toLocaleString("id-ID")}
-function openCart(){document.getElementById("drawer").classList.add("open")}function closeCart(){document.getElementById("drawer").classList.remove("open")}
-function sendWA(){if(!cart.length)return alert("Keranjang kosong.");let n=document.getElementById("name").value.trim();if(!n)return alert("Masukkan nama.");let k=document.getElementById("className").value.trim(),note=document.getElementById("note").value.trim();let m=`Halo, saya mau pesan Rice Bowl Bekal.%0A%0ANama: ${encodeURIComponent(n)}%0AKelas: ${encodeURIComponent(k)}%0A%0APesanan:%0A`;cart.forEach(x=>m+=`- ${encodeURIComponent(x.name)} x${x.qty}%0A`);m+=`%0ATotal: Rp${cart.reduce((s,x)=>s+x.price*x.qty,0).toLocaleString("id-ID")}`;if(note)m+=`%0A%0ACatatan: ${encodeURIComponent(note)}`;window.open("https://wa.me/6285245570300?text="+m,"_blank")}
-loadProducts();renderCart();
+
+
+/* ==========================
+   ADD TO CART
+========================== */
+
+function addToCart(productId){
+
+    const product =
+        products.find(
+            p => p.id === productId
+        );
+
+
+    if(!product)
+        return;
+
+
+    if(Number(product.stock) <= 0){
+
+        showMessage(
+            "Stok produk sudah habis.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const existing =
+        cart.find(
+            item => item.id === productId
+        );
+
+
+    if(existing){
+
+        if(
+            existing.quantity >=
+            Number(product.stock)
+        ){
+
+            alert(
+                "Jumlah melebihi stok."
+            );
+
+            return;
+
+        }
+
+
+        existing.quantity++;
+
+    }
+
+    else{
+
+        cart.push({
+
+            id:product.id,
+
+            name:product.name,
+
+            price:Number(product.price),
+
+            quantity:1
+
+        });
+
+    }
+
+
+    renderCart();
+
+    openCart();
+
+}
+
+
+/* ==========================
+   PLUS
+========================== */
+
+function increaseQuantity(index){
+
+    const item =
+        cart[index];
+
+
+    const product =
+        products.find(
+            p => p.id === item.id
+        );
+
+
+    if(
+        item.quantity >=
+        Number(product.stock)
+    ){
+
+        alert(
+            "Jumlah melebihi stok."
+        );
+
+        return;
+
+    }
+
+
+    item.quantity++;
+
+    renderCart();
+
+}
+
+
+/* ==========================
+   MINUS
+========================== */
+
+function decreaseQuantity(index){
+
+    const item =
+        cart[index];
+
+
+    item.quantity--;
+
+
+    if(item.quantity <= 0){
+
+        cart.splice(index,1);
+
+    }
+
+
+    renderCart();
+
+}
+
+
+/* ==========================
+   RENDER CART
+========================== */
+
+function renderCart(){
+
+    const container =
+        document.getElementById(
+            "cartItems"
+        );
+
+
+    const count =
+        cart.reduce(
+            (sum,item) =>
+            sum + item.quantity,
+            0
+        );
+
+
+    document.getElementById(
+        "cartCount"
+    ).textContent = count;
+
+
+    if(cart.length === 0){
+
+        container.innerHTML =
+            `<p>
+                Keranjang masih kosong.
+            </p>`;
+
+
+        document.getElementById(
+            "total"
+        ).textContent = "Rp0";
+
+
+        return;
+
+    }
+
+
+    let total = 0;
+
+
+    container.innerHTML =
+        cart.map((item,index) => {
+
+            const subtotal =
+                item.price *
+                item.quantity;
+
+
+            total += subtotal;
+
+
+            return `
+
+                <div class="cart-item">
+
+                    <b>
+                        ${escapeHTML(item.name)}
+                    </b>
+
+
+                    <p>
+                        Rp${item.price.toLocaleString("id-ID")}
+                    </p>
+
+
+                    <div class="quantity">
+
+                        <button
+                            onclick="decreaseQuantity(${index})"
+                        >
+                            −
+                        </button>
+
+
+                        <b>
+                            ${item.quantity}
+                        </b>
+
+
+                        <button
+                            onclick="increaseQuantity(${index})"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+
+    document.getElementById(
+        "total"
+    ).textContent =
+        "Rp" +
+        total.toLocaleString(
+            "id-ID"
+        );
+
+}
+
+
+/* ==========================
+   CREATE ORDER
+========================== */
+
+async function createOrder(){
+
+    const name =
+        document
+        .getElementById(
+            "customerName"
+        )
+        .value
+        .trim();
+
+
+    const customerClass =
+        document
+        .getElementById(
+            "customerClass"
+        )
+        .value
+        .trim();
+
+
+    const note =
+        document
+        .getElementById(
+            "note"
+        )
+        .value
+        .trim();
+
+
+    const button =
+        document.getElementById(
+            "orderButton"
+        );
+
+
+    if(cart.length === 0){
+
+        showMessage(
+            "Keranjang masih kosong.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!name){
+
+        showMessage(
+            "Nama pembeli harus diisi.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!customerClass){
+
+        showMessage(
+            "Kelas harus diisi.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "⏳ Menyimpan pesanan...";
+
+
+    try{
+
+
+        /* ==========================
+           CEK STOK TERBARU
+        ========================== */
+
+        const ids =
+            cart.map(
+                item => item.id
+            );
+
+
+        const {
+            data:latestProducts,
+            error:stockError
+        } =
+            await database
+            .from("products")
+            .select("*")
+            .in("id",ids);
+
+
+        if(stockError)
+            throw stockError;
+
+
+        for(const item of cart){
+
+            const latest =
+                latestProducts.find(
+                    p => p.id === item.id
+                );
+
+
+            if(
+                !latest ||
+                Number(latest.stock) <
+                item.quantity
+            ){
+
+                throw new Error(
+                    `Stok ${item.name} tidak mencukupi.`
+                );
+
+            }
+
+        }
+
+
+        /* ==========================
+           SIMPAN SETIAP ITEM
+        ========================== */
+
+        for(const item of cart){
+
+            const product =
+                latestProducts.find(
+                    p => p.id === item.id
+                );
+
+
+            const total =
+                Number(item.price) *
+                item.quantity;
+
+
+            const {
+                error:orderError
+            } =
+                await database
+                .from("orders")
+                .insert({
+
+                    customer_name:name,
+
+                    customer_class:
+                        customerClass,
+
+                    product_name:
+                        item.name,
+
+                    quantity:
+                        item.quantity,
+
+                    total:total,
+
+                    note:note,
+
+                    status:"Baru"
+
+                });
+
+
+            if(orderError)
+                throw orderError;
+
+
+            /* ==========================
+               UPDATE STOK
+            ========================== */
+
+            const newStock =
+                Number(product.stock) -
+                item.quantity;
+
+
+            const {
+                error:updateError
+            } =
+                await database
+                .from("products")
+                .update({
+
+                    stock:newStock
+
+                })
+                .eq(
+                    "id",
+                    item.id
+                );
+
+
+            if(updateError)
+                throw updateError;
+
+        }
+
+
+        /* ==========================
+           BUAT PESAN WHATSAPP
+        ========================== */
+
+        let message =
+            "Halo, saya mau pesan Rice Bowl Bekal.%0A%0A";
+
+
+        message +=
+            "Nama: " +
+            encodeURIComponent(name) +
+            "%0A";
+
+
+        message +=
+            "Kelas: " +
+            encodeURIComponent(
+                customerClass
+            ) +
+            "%0A%0A";
+
+
+        message +=
+            "Pesanan:%0A";
+
+
+        cart.forEach(item => {
+
+            message +=
+                "- " +
+                encodeURIComponent(
+                    item.name
+                ) +
+                " x" +
+                item.quantity +
+                "%0A";
+
+        });
+
+
+        const grandTotal =
+            cart.reduce(
+                (sum,item) =>
+                sum +
+                (
+                    item.price *
+                    item.quantity
+                ),
+                0
+            );
+
+
+        message +=
+            "%0ATotal: Rp" +
+            grandTotal.toLocaleString(
+                "id-ID"
+            );
+
+
+        if(note){
+
+            message +=
+                "%0A%0ACatatan: " +
+                encodeURIComponent(
+                    note
+                );
+
+        }
+
+
+        /* ==========================
+           BERHASIL
+        ========================== */
+
+        showMessage(
+            "Pesanan berhasil disimpan! WhatsApp akan dibuka.",
+            "success"
+        );
+
+
+        cart = [];
+
+
+        renderCart();
+
+
+        await loadProducts();
+
+
+        button.textContent =
+            "✅ Pesanan Berhasil";
+
+
+        setTimeout(() => {
+
+            window.open(
+                "https://wa.me/6285245570300?text=" +
+                message,
+                "_blank"
+            );
+
+
+            button.disabled = false;
+
+            button.textContent =
+                "📱 Pesan Sekarang";
+
+
+        },1000);
+
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        showMessage(
+            "Pesanan gagal: " +
+            error.message,
+            "error"
+        );
+
+
+        button.disabled = false;
+
+        button.textContent =
+            "📱 Pesan Sekarang";
+
+    }
+
+}
+
+
+/* ==========================
+   MESSAGE
+========================== */
+
+function showMessage(
+    text,
+    type
+){
+
+    const box =
+        document.getElementById(
+            "message"
+        );
+
+
+    box.textContent = text;
+
+
+    box.className =
+        "message " +
+        type;
+
+
+    setTimeout(() => {
+
+        box.className =
+            "message";
+
+    },5000);
+
+}
+
+
+/* ==========================
+   OPEN / CLOSE CART
+========================== */
+
+function openCart(){
+
+    document
+    .getElementById("cart")
+    .classList.add("open");
+
+}
+
+
+function closeCart(){
+
+    document
+    .getElementById("cart")
+    .classList.remove("open");
+
+}
+
+
+/* ==========================
+   SECURITY
+========================== */
+
+function escapeHTML(text){
+
+    return String(text)
+        .replace(
+            /[&<>"']/g,
+            function(char){
+
+                const chars = {
+
+                    "&":"&amp;",
+                    "<":"&lt;",
+                    ">":"&gt;",
+                    '"':"&quot;",
+                    "'":"&#039;"
+
+                };
+
+                return chars[char];
+
+            }
+        );
+
+}
+
+
+/* ==========================
+   START
+========================== */
+
+loadProducts();
+
+renderCart();
+
+
 </script>
+
 </body>
 </html>
