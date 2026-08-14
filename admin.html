@@ -1,487 +1,3 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin - Rice Bowl Bekal</title>
-
-<style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    font-family:Arial,sans-serif;
-    background:#fff8ef;
-    color:#382018;
-    padding-bottom:40px;
-}
-
-/* HEADER */
-
-header{
-    position:sticky;
-    top:0;
-    z-index:10;
-
-    background:#ff6b35;
-    color:white;
-
-    padding:16px 6%;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    box-shadow:0 3px 12px #0002;
-}
-
-.logo{
-    font-size:22px;
-    font-weight:bold;
-}
-
-.refresh-button{
-    border:none;
-    background:white;
-    color:#e95725;
-
-    padding:10px 16px;
-
-    border-radius:25px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-}
-
-.refresh-button:disabled{
-    opacity:.6;
-    cursor:not-allowed;
-}
-
-/* SECTION */
-
-.section{
-    padding:30px 6% 10px;
-}
-
-.section h2{
-    font-size:24px;
-    margin-bottom:6px;
-}
-
-.section p.sub{
-    color:#777;
-    margin-bottom:20px;
-}
-
-/* STATS */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:18px;
-}
-
-.stat-card{
-    background:white;
-    border-radius:18px;
-    padding:20px;
-    box-shadow:0 5px 18px #0001;
-    text-align:center;
-}
-
-.stat-card .icon{
-    font-size:26px;
-}
-
-.stat-card .value{
-    font-size:26px;
-    font-weight:bold;
-    margin-top:6px;
-}
-
-.stat-card .label{
-    color:#777;
-    font-size:13px;
-    margin-top:4px;
-}
-
-/* FILTER */
-
-.filters{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-bottom:20px;
-}
-
-.filter-btn{
-    border:1px solid #ffcba6;
-    background:white;
-    color:#382018;
-    padding:8px 16px;
-    border-radius:20px;
-    cursor:pointer;
-    font-weight:bold;
-    font-size:13px;
-}
-
-.filter-btn.active{
-    background:#ff6b35;
-    color:white;
-    border-color:#ff6b35;
-}
-
-/* ORDERS TABLE */
-
-.orders-list{
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-}
-
-.order-card{
-    background:white;
-    border-radius:16px;
-    padding:18px 20px;
-    box-shadow:0 5px 18px #0001;
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:space-between;
-    align-items:center;
-    gap:14px;
-    border-left:6px solid #ccc;
-}
-
-.order-card.status-Baru{ border-left-color:#ff9f1c; }
-.order-card.status-Diproses{ border-left-color:#2f8fe0; }
-.order-card.status-Siap-Diambil{ border-left-color:#2fb85c; }
-.order-card.status-Selesai{ border-left-color:#888; opacity:.75; }
-
-.order-info{
-    flex:1;
-    min-width:220px;
-}
-
-.order-info .top{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:6px;
-}
-
-.order-id{
-    font-weight:bold;
-    color:#e95725;
-}
-
-.badge{
-    display:inline-block;
-    padding:4px 10px;
-    border-radius:12px;
-    font-size:12px;
-    font-weight:bold;
-    color:white;
-}
-
-.badge.Baru{ background:#ff9f1c; }
-.badge.Diproses{ background:#2f8fe0; }
-.badge.Siap-Diambil{ background:#2fb85c; }
-.badge.Selesai{ background:#888; }
-
-.order-info .name{
-    font-weight:bold;
-    font-size:16px;
-}
-
-.order-info .meta{
-    color:#666;
-    font-size:14px;
-    margin-top:2px;
-}
-
-.order-info .note{
-    color:#a56b2c;
-    font-size:13px;
-    margin-top:4px;
-    font-style:italic;
-}
-
-.order-total{
-    font-weight:bold;
-    color:#f4511e;
-    font-size:18px;
-    min-width:100px;
-    text-align:right;
-}
-
-.order-actions{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-}
-
-.status-btn{
-    border:none;
-    padding:9px 14px;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
-    font-size:13px;
-    color:white;
-}
-
-.status-btn.next{ background:#ff6b35; }
-.status-btn.done{ background:#e0e0e0; color:#888; cursor:default; }
-.status-btn.delete{ background:#ffe8e8; color:#a52222; }
-
-/* PRODUCTS / STOCK */
-
-.products-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:18px;
-}
-
-.product-card{
-    background:white;
-    border-radius:16px;
-    padding:18px;
-    box-shadow:0 5px 18px #0001;
-}
-
-.product-card h3{
-    font-size:18px;
-    margin-bottom:4px;
-}
-
-.product-card .status-active{
-    display:inline-block;
-    font-size:12px;
-    padding:3px 10px;
-    border-radius:10px;
-    margin-bottom:12px;
-    font-weight:bold;
-}
-
-.status-active.on{ background:#e9f9ed; color:#176b2c; }
-.status-active.off{ background:#f0f0f0; color:#888; }
-
-.field-row{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    margin-bottom:10px;
-}
-
-.field-row label{
-    width:60px;
-    font-size:13px;
-    color:#666;
-}
-
-.field-row input{
-    flex:1;
-    padding:9px 10px;
-    border:1px solid #ddd;
-    border-radius:8px;
-    font-family:Arial;
-}
-
-.stock-controls{
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.stock-controls button{
-    border:none;
-    background:#ff6b35;
-    color:white;
-    width:32px;
-    height:32px;
-    border-radius:50%;
-    font-weight:bold;
-    cursor:pointer;
-    font-size:16px;
-}
-
-.card-actions{
-    display:flex;
-    gap:8px;
-    margin-top:14px;
-}
-
-.save-btn{
-    flex:1;
-    border:none;
-    background:#25d366;
-    color:white;
-    padding:10px;
-    border-radius:10px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.toggle-btn{
-    border:none;
-    background:#eee;
-    color:#382018;
-    padding:10px 14px;
-    border-radius:10px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-/* ADD PRODUCT */
-
-.add-product-card{
-    background:white;
-    border-radius:16px;
-    padding:18px;
-    box-shadow:0 5px 18px #0001;
-    border:2px dashed #ffcba6;
-}
-
-.add-product-card h3{
-    margin-bottom:12px;
-}
-
-/* LOADING / EMPTY */
-
-.loading, .empty{
-    text-align:center;
-    padding:30px;
-    color:#777;
-}
-
-.toast{
-    position:fixed;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    background:#382018;
-    color:white;
-    padding:12px 22px;
-    border-radius:30px;
-    font-size:14px;
-    z-index:50;
-    display:none;
-    box-shadow:0 5px 20px #0003;
-}
-
-.toast.show{ display:block; }
-.toast.error{ background:#a52222; }
-
-@media(max-width:650px){
-    .order-total{ text-align:left; }
-    .order-card{ flex-direction:column; align-items:flex-start; }
-}
-
-</style>
-</head>
-<body>
-
-<header>
-    <div class="logo">🍱 Admin Rice Bowl Bekal</div>
-    <button class="refresh-button" id="refreshBtn" onclick="refreshAll()">🔄 Refresh</button>
-</header>
-
-<!-- STATS -->
-<section class="section">
-    <h2>📦 Dashboard Pesanan</h2>
-    <p class="sub">Kelola pesanan dan lihat stok Rice Bowl.</p>
-
-    <div class="stats">
-        <div class="stat-card">
-            <div class="icon">📦</div>
-            <div class="value" id="statTotal">0</div>
-            <div class="label">Total Pesanan</div>
-        </div>
-        <div class="stat-card">
-            <div class="icon">🟠</div>
-            <div class="value" id="statBaru">0</div>
-            <div class="label">Pesanan Baru</div>
-        </div>
-        <div class="stat-card">
-            <div class="icon">🍱</div>
-            <div class="value" id="statProses">0</div>
-            <div class="label">Sedang Diproses</div>
-        </div>
-        <div class="stat-card">
-            <div class="icon">💰</div>
-            <div class="value" id="statTotalRp">Rp0</div>
-            <div class="label">Total Penjualan</div>
-        </div>
-    </div>
-</section>
-
-<!-- ORDERS -->
-<section class="section">
-    <h2>📋 Daftar Pesanan</h2>
-    <p class="sub">Klik tombol untuk mengubah status pesanan.</p>
-
-    <div class="filters" id="filters">
-        <button class="filter-btn active" data-filter="Semua" onclick="setFilter('Semua')">Semua Status</button>
-        <button class="filter-btn" data-filter="Baru" onclick="setFilter('Baru')">🟠 Baru</button>
-        <button class="filter-btn" data-filter="Diproses" onclick="setFilter('Diproses')">🔵 Diproses</button>
-        <button class="filter-btn" data-filter="Siap Diambil" onclick="setFilter('Siap Diambil')">🟢 Siap Diambil</button>
-        <button class="filter-btn" data-filter="Selesai" onclick="setFilter('Selesai')">⚫ Selesai</button>
-    </div>
-
-    <div class="orders-list" id="ordersList">
-        <div class="loading">Memuat pesanan...</div>
-    </div>
-</section>
-
-<!-- PRODUCTS / STOCK & PRICE -->
-<section class="section">
-    <h2>📊 Stok &amp; Harga Produk</h2>
-    <p class="sub">Atur stok, harga, dan status aktif menu di sini.</p>
-
-    <div class="products-grid" id="productsGrid">
-        <div class="loading">Memuat stok...</div>
-    </div>
-</section>
-
-<!-- TAMBAH MENU BARU -->
-<section class="section">
-    <h2>➕ Tambah Menu Baru</h2>
-    <p class="sub">Tambahkan menu Rice Bowl baru ke daftar.</p>
-
-    <div class="add-product-card">
-        <div class="field-row">
-            <label>Nama</label>
-            <input id="newName" type="text" placeholder="Contoh: Ayam Suwir">
-        </div>
-        <div class="field-row">
-            <label>Deskripsi</label>
-            <input id="newDesc" type="text" placeholder="Deskripsi singkat">
-        </div>
-        <div class="field-row">
-            <label>Harga</label>
-            <input id="newPrice" type="number" placeholder="10000">
-        </div>
-        <div class="field-row">
-            <label>Stok</label>
-            <input id="newStock" type="number" placeholder="20">
-        </div>
-        <div class="field-row">
-            <label>Gambar</label>
-            <input id="newImage" type="text" placeholder="ayam-suwir.png (opsional)">
-        </div>
-        <button class="save-btn" onclick="addProduct()">💾 Tambah Menu</button>
-    </div>
-</section>
-
-<div class="toast" id="toast"></div>
-
-<!-- SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
 
@@ -496,10 +12,26 @@ let products = [];
 let currentFilter = "Semua";
 
 /* ==========================
-   INIT
+   INIT & REALTIME LISTENERS
 ========================== */
 
 refreshAll();
+subscribeToRealtime();
+
+function subscribeToRealtime() {
+    // Mendengarkan perubahan otomatis dari tabel orders (Insert, Update, Delete)
+    database
+        .channel('public:orders')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'orders' }, (payload) => {
+            console.log('Perubahan pesanan terdeteksi:', payload);
+            loadOrders(); // Load ulang pesanan saat ada data baru/berubah
+            
+            if (payload.eventType === 'INSERT') {
+                showToast("🔔 Pesanan baru telah masuk!");
+            }
+        })
+        .subscribe();
+}
 
 async function refreshAll(){
     const btn = document.getElementById("refreshBtn");
@@ -518,16 +50,15 @@ async function refreshAll(){
 
 async function loadOrders(){
     const container = document.getElementById("ordersList");
-    container.innerHTML = `<div class="loading">Memuat pesanan...</div>`;
 
     const { data, error } = await database
         .from("orders")
         .select("*")
-        .order("id", { ascending:false });
+        .order("id", { ascending: false });
 
     if(error){
-        console.error(error);
-        container.innerHTML = `<div class="empty">❌ Gagal mengambil pesanan.</div>`;
+        console.error("Error fetching orders:", error);
+        container.innerHTML = `<div class="empty">❌ Gagal mengambil pesanan: ${escapeHTML(error.message)}</div>`;
         return;
     }
 
@@ -540,7 +71,7 @@ function renderStats(){
     const total = orders.length;
     const baru = orders.filter(o => o.status === "Baru").length;
     const proses = orders.filter(o => o.status === "Diproses").length;
-    const totalRp = orders.reduce((sum,o) => sum + Number(o.total || 0), 0);
+    const totalRp = orders.reduce((sum, o) => sum + Number(o.total || 0), 0);
 
     document.getElementById("statTotal").textContent = total;
     document.getElementById("statBaru").textContent = baru;
@@ -571,8 +102,8 @@ function renderOrders(){
     }
 
     container.innerHTML = list.map(order => {
-        const statusClass = "status-" + (order.status || "Baru").replace(" ", "-");
-        const badgeClass = (order.status || "Baru").replace(" ", "-");
+        const statusClass = "status-" + (order.status || "Baru").replace(/\s+/g, "-");
+        const badgeClass = (order.status || "Baru").replace(/\s+/g, "-");
         const currentIndex = STATUS_FLOW.indexOf(order.status);
         const nextStatus = currentIndex >= 0 && currentIndex < STATUS_FLOW.length - 1
             ? STATUS_FLOW[currentIndex + 1]
@@ -585,12 +116,12 @@ function renderOrders(){
                         <span class="order-id">#${order.id}</span>
                         <span class="badge ${badgeClass}">${escapeHTML(order.status || "Baru")}</span>
                     </div>
-                    <div class="name">${escapeHTML(order.customer_name)} — ${escapeHTML(order.customer_class)}</div>
-                    <div class="meta">${escapeHTML(order.product_name)} × ${order.quantity}</div>
+                    <div class="name">${escapeHTML(order.customer_name || "-")} — ${escapeHTML(order.customer_class || "-")}</div>
+                    <div class="meta">${escapeHTML(order.product_name || "-")} × ${order.quantity || 1}</div>
                     ${order.note ? `<div class="note">📝 ${escapeHTML(order.note)}</div>` : ""}
                 </div>
 
-                <div class="order-total">Rp${Number(order.total).toLocaleString("id-ID")}</div>
+                <div class="order-total">Rp${Number(order.total || 0).toLocaleString("id-ID")}</div>
 
                 <div class="order-actions">
                     ${nextStatus
@@ -654,7 +185,6 @@ async function deleteOrder(orderId){
 
 async function loadProducts(){
     const container = document.getElementById("productsGrid");
-    container.innerHTML = `<div class="loading">Memuat stok...</div>`;
 
     const { data, error } = await database
         .from("products")
@@ -662,7 +192,7 @@ async function loadProducts(){
         .order("id");
 
     if(error){
-        console.error(error);
+        console.error("Error fetching products:", error);
         container.innerHTML = `<div class="empty">❌ Gagal mengambil produk.</div>`;
         return;
     }
@@ -730,7 +260,7 @@ async function saveProduct(productId){
 
     const { error } = await database
         .from("products")
-        .update({ price:newPrice, stock:newStock })
+        .update({ price: newPrice, stock: newStock })
         .eq("id", productId);
 
     if(error){
@@ -755,7 +285,7 @@ async function toggleActive(productId){
 
     const { error } = await database
         .from("products")
-        .update({ active:newActive })
+        .update({ active: newActive })
         .eq("id", productId);
 
     if(error){
@@ -825,4 +355,22 @@ async function addProduct(){
 ========================== */
 
 function escapeHTML(str){
-  
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+function showToast(message, isError = false){
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.className = "toast show" + (isError ? " error" : "");
+    setTimeout(() => {
+        toast.className = "toast";
+    }, 3000);
+}
+
+</script>
