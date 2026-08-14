@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin Rice Bowl Bekal</title>
+<style>
+*{box-sizing:border-box}body{font-family:Arial;background:#fff8ef;color:#382018;margin:0}header{background:#ff6b35;color:white;padding:20px 7%}main{max-width:850px;margin:35px auto;padding:0 20px}.card{background:white;padding:25px;border-radius:20px;box-shadow:0 7px 25px #0002;margin-bottom:20px}input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:7px 0 15px}label{font-weight:bold}.btn{border:0;border-radius:10px;padding:12px 16px;font-weight:bold;cursor:pointer;background:#ff6b35;color:white;margin-right:8px}.danger{background:#d94b32}.ok{background:#25d366}.status{margin-top:15px;padding:12px;border-radius:10px;background:#e9f9ed;display:none}.product{border-top:1px solid #eee;padding:18px 0}.row{display:grid;grid-template-columns:1fr 150px 130px;gap:10px;align-items:end}@media(max-width:650px){.row{grid-template-columns:1fr}}
+</style></head>
+<body><header><h1>⚙️ Admin Rice Bowl Bekal</h1><p>Kelola menu dan stok dari database online.</p></header>
+<main><div class="card"><h2>Tambah Produk</h2><label>Nama</label><input id="name" placeholder="Contoh: Rice Bowl Ayam Suwir"><label>Deskripsi</label><input id="desc" placeholder="Isi produk"><label>Harga</label><input id="price" type="number" value="10000"><label>Stok</label><input id="stock" type="number" value="20"><label>Nama file gambar</label><input id="image" value="ayam-suwir.png"><button class="btn ok" onclick="addProduct()">+ Tambah Produk</button><div id="status" class="status"></div></div>
+<div class="card"><h2>Daftar Produk</h2><div id="list">Memuat...</div></div></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script>
+<script>
+const db=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+async function load(){const {data,error}=await db.from("products").select("*").order("id");if(error){document.getElementById("list").textContent="Database belum terhubung.";return}document.getElementById("list").innerHTML=data.map(p=>`<div class="product"><div class="row"><div><b>${p.name}</b><br><small>${p.description||''}</small></div><div><label>Harga</label><input id="p${p.id}" type="number" value="${p.price}"></div><div><label>Stok</label><input id="s${p.id}" type="number" value="${p.stock}"></div></div><button class="btn" onclick="updateProduct(${p.id})">💾 Simpan</button><button class="btn danger" onclick="removeProduct(${p.id})">Hapus</button></div>`).join("")}
+async function addProduct(){let name=document.getElementById("name").value.trim();if(!name)return alert("Isi nama produk.");let {error}=await db.from("products").insert({name,description:document.getElementById("desc").value,price:Number(document.getElementById("price").value),stock:Number(document.getElementById("stock").value),image:document.getElementById("image").value||"ayam-suwir.png"});if(error)return alert(error.message);show("Produk berhasil ditambahkan.");load()}
+async function updateProduct(id){let price=Number(document.getElementById("p"+id).value),stock=Number(document.getElementById("s"+id).value);let {error}=await db.from("products").update({price,stock}).eq("id",id);if(error)return alert(error.message);show("Perubahan berhasil disimpan.");load()}
+async function removeProduct(id){if(!confirm("Hapus produk ini?"))return;let {error}=await db.from("products").delete().eq("id",id);if(error)return alert(error.message);load()}
+function show(t){let x=document.getElementById("status");x.textContent=t;x.style.display="block";setTimeout(()=>x.style.display="none",2500)}
+load();
+</script></body></html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Rice Bowl Bekal</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#fff8ef;color:#382018}
+header{position:sticky;top:0;z-index:5;background:#ff6b35;color:#fff;padding:16px 6%;display:flex;justify-content:space-between;align-items:center;box-shadow:0 3px 12px #0002}
+.logo{font-size:22px;font-weight:800}.cart{border:0;background:#fff;color:#e95725;padding:10px 16px;border-radius:25px;font-weight:700;cursor:pointer}
+.hero{background:linear-gradient(135deg,#ff6b35,#ff9f1c);color:white;padding:55px 7%;display:flex;justify-content:space-between;align-items:center;gap:25px}.hero h1{font-size:42px;margin-bottom:15px}.hero p{font-size:17px;line-height:1.6}.emoji{font-size:100px}
+.menu{padding:45px 7%}.title{text-align:center;margin-bottom:30px}.title h2{font-size:30px}.title p{color:#777;margin-top:7px}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;max-width:1100px;margin:auto}.card{background:white;border-radius:22px;overflow:hidden;box-shadow:0 7px 25px #0002}.photo{height:280px;background:#ffe2bc}.photo img{width:100%;height:100%;object-fit:cover}.info{padding:20px}.info h3{font-size:22px;margin-bottom:8px}.desc{color:#777;line-height:1.5;font-size:14px}.price{color:#f4511e;font-size:22px;font-weight:800;margin-top:13px}.stock{margin-top:7px;color:#555}.add{width:100%;border:0;background:#ff6b35;color:#fff;padding:13px;border-radius:12px;margin-top:15px;font-weight:700;cursor:pointer}.add:disabled{background:#aaa}
+.drawer{position:fixed;right:-420px;top:0;width:390px;max-width:100%;height:100vh;background:#fff;z-index:10;padding:25px;box-shadow:-7px 0 25px #0003;transition:.3s;overflow:auto}.drawer.open{right:0}.head{display:flex;justify-content:space-between;margin-bottom:20px}.close{border:0;background:none;font-size:30px;cursor:pointer}.item{padding:15px 0;border-bottom:1px solid #eee}.qty{display:flex;gap:12px;align-items:center;margin-top:8px}.qty button{border:0;background:#ff6b35;color:#fff;border-radius:50%;width:28px;height:28px}.total{font-size:21px;font-weight:800;margin-top:20px}.form{margin-top:20px}.form input,.form textarea{width:100%;padding:12px;margin-bottom:10px;border:1px solid #ddd;border-radius:10px}.wa{width:100%;padding:14px;border:0;border-radius:12px;background:#25d366;color:#fff;font-weight:800}
+footer{background:#382018;color:#fff;text-align:center;padding:25px;margin-top:30px}@media(max-width:650px){.hero{flex-direction:column;text-align:center}.hero h1{font-size:32px}.drawer{width:100%}}
+</style>
+</head>
+<body>
+<header><div class="logo">🍱 Rice Bowl Bekal</div><button class="cart" onclick="openCart()">🛒 Keranjang (<span id="count">0</span>)</button></header>
+<section class="hero"><div><h1>Bekal Enak untuk Hari Sekolah!</h1><p>Pesan rice bowl praktis untuk bekal sekolah.</p></div><div class="emoji">🍱</div></section>
+<section class="menu"><div class="title"><h2>Menu Hari Ini</h2><p>Stok diperbarui langsung dari database.</p></div><div class="products" id="products"><p>Memuat menu...</p></div></section>
+
+<div class="drawer" id="drawer"><div class="head"><h2>🛒 Keranjang</h2><button class="close" onclick="closeCart()">×</button></div><div id="items"><p>Keranjang kosong.</p></div><div class="total">Total: <span id="total">Rp0</span></div><div class="form"><input id="name" placeholder="Nama pembeli"><input id="className" placeholder="Kelas"><textarea id="note" rows="3" placeholder="Catatan"></textarea><button class="wa" onclick="sendWA()">📱 Pesan lewat WhatsApp</button></div></div>
+
+<footer>© 2026 Rice Bowl Bekal ❤️</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script>
+const db=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+let products=[],cart=[];
+async function loadProducts(){
+ const {data,error}=await db.from("products").select("*").eq("active",true).order("id");
+ if(error){document.getElementById("products").innerHTML="<p>Database belum terhubung. Isi config.js terlebih dahulu.</p>";console.error(error);return}
+ products=data; renderProducts();
+}
+function renderProducts(){
+ const box=document.getElementById("products");
+ box.innerHTML=products.map(p=>`
+ <div class="card"><div class="photo"><img src="${p.image||'ayam-suwir.png'}" alt="${p.name}"></div>
+ <div class="info"><h3>${p.name}</h3><p class="desc">${p.description||''}</p>
+ <div class="price">Rp${Number(p.price).toLocaleString("id-ID")}</div>
+ <div class="stock">Stok: <b>${p.stock}</b></div>
+ <button class="add" ${p.stock<=0?'disabled':''} onclick="add(${p.id})">${p.stock<=0?'HABIS':'+ Tambah ke Keranjang'}</button>
+ </div></div>`).join("");
+}
+function add(id){let p=products.find(x=>x.id===id);let c=cart.find(x=>x.id===id);if(!p||p.stock<=0)return;if(c)c.qty++;else cart.push({id:p.id,name:p.name,price:p.price,qty:1});p.stock--;renderProducts();renderCart()}
+function plus(i){let c=cart[i],p=products.find(x=>x.id===c.id);if(!p||p.stock<=0)return alert("Stok habis.");c.qty++;p.stock--;renderProducts();renderCart()}
+function minus(i){let c=cart[i],p=products.find(x=>x.id===c.id);c.qty--;p.stock++;if(c.qty<=0)cart.splice(i,1);renderProducts();renderCart()}
+function renderCart(){document.getElementById("count").textContent=cart.reduce((s,x)=>s+x.qty,0);let box=document.getElementById("items");if(!cart.length){box.innerHTML="<p>Keranjang kosong.</p>";document.getElementById("total").textContent="Rp0";return}box.innerHTML=cart.map((x,i)=>`<div class="item"><b>${x.name}</b><p>Rp${Number(x.price).toLocaleString("id-ID")}</p><div class="qty"><button onclick="minus(${i})">−</button><b>${x.qty}</b><button onclick="plus(${i})">+</button></div></div>`).join("");document.getElementById("total").textContent="Rp"+cart.reduce((s,x)=>s+x.price*x.qty,0).toLocaleString("id-ID")}
+function openCart(){document.getElementById("drawer").classList.add("open")}function closeCart(){document.getElementById("drawer").classList.remove("open")}
+function sendWA(){if(!cart.length)return alert("Keranjang kosong.");let n=document.getElementById("name").value.trim();if(!n)return alert("Masukkan nama.");let k=document.getElementById("className").value.trim(),note=document.getElementById("note").value.trim();let m=`Halo, saya mau pesan Rice Bowl Bekal.%0A%0ANama: ${encodeURIComponent(n)}%0AKelas: ${encodeURIComponent(k)}%0A%0APesanan:%0A`;cart.forEach(x=>m+=`- ${encodeURIComponent(x.name)} x${x.qty}%0A`);m+=`%0ATotal: Rp${cart.reduce((s,x)=>s+x.price*x.qty,0).toLocaleString("id-ID")}`;if(note)m+=`%0A%0ACatatan: ${encodeURIComponent(note)}`;window.open("https://wa.me/6285245570300?text="+m,"_blank")}
+loadProducts();renderCart();
+</script>
+</body>
+</html>
