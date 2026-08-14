@@ -463,6 +463,270 @@ select{
 
 }
 
+
+/* ==========================
+   KELOLA PRODUK
+========================== */
+
+.product-manage-box{
+    margin-top:30px;
+    background:white;
+    border-radius:20px;
+    box-shadow:0 5px 25px #0002;
+    overflow:hidden;
+}
+
+.product-manage-header{
+    padding:20px;
+    border-bottom:1px solid #eee;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.add-product-button{
+    border:none;
+    background:#ff6b35;
+    color:white;
+    padding:11px 16px;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.manage-list{
+    padding:20px;
+}
+
+.manage-card{
+    border:1px solid #eee;
+    border-radius:16px;
+    padding:18px;
+    margin-bottom:15px;
+    background:#fff;
+}
+
+.manage-card:last-child{
+    margin-bottom:0;
+}
+
+.manage-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+}
+
+.manage-name{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.manage-description{
+    color:#777;
+    margin-top:5px;
+    line-height:1.5;
+}
+
+.manage-price{
+    color:#f4511e;
+    font-size:18px;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+.manage-stock{
+    margin-top:5px;
+    color:#555;
+}
+
+.manage-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:15px;
+}
+
+.manage-button{
+    border:none;
+    padding:9px 12px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.edit-product{
+    background:#e4f0ff;
+    color:#1769aa;
+}
+
+.stock-product{
+    background:#e9f9ed;
+    color:#21853a;
+}
+
+.toggle-product{
+    background:#fff1d6;
+    color:#b96b00;
+}
+
+.delete-product{
+    background:#ffe5e5;
+    color:#c62828;
+}
+
+.active-badge{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    background:#e9f9ed;
+    color:#21853a;
+}
+
+.inactive-badge{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    background:#eee;
+    color:#666;
+}
+
+/* MODAL */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#0008;
+    z-index:100;
+    padding:20px;
+    overflow:auto;
+}
+
+.modal.open{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.modal-content{
+    width:100%;
+    max-width:550px;
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 10px 40px #0005;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.modal-close{
+    border:none;
+    background:none;
+    font-size:30px;
+    cursor:pointer;
+    line-height:1;
+}
+
+.product-form label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:6px;
+}
+
+.product-form input,
+.product-form textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    margin-bottom:14px;
+    font-family:Arial;
+}
+
+.product-form textarea{
+    resize:vertical;
+}
+
+.form-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.save-product{
+    flex:1;
+    border:none;
+    background:#25a244;
+    color:white;
+    padding:13px;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.cancel-product{
+    border:none;
+    background:#eee;
+    color:#444;
+    padding:13px 18px;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.product-image-preview{
+    width:100%;
+    height:170px;
+    object-fit:cover;
+    border-radius:12px;
+    background:#ffe2bc;
+    margin-bottom:14px;
+    display:none;
+}
+
+.product-image-preview.show{
+    display:block;
+}
+
+@media(max-width:650px){
+
+    .product-manage-header{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .add-product-button{
+        width:100%;
+    }
+
+    .manage-top{
+        flex-direction:column;
+    }
+
+    .manage-actions{
+        flex-direction:column;
+    }
+
+    .manage-button{
+        width:100%;
+    }
+
+    .form-buttons{
+        flex-direction:column;
+    }
+
+}
+
 </style>
 
 </head>
@@ -671,6 +935,153 @@ select{
     </div>
 
 
+
+    <!-- KELOLA MENU -->
+
+    <div class="product-manage-box">
+
+        <div class="product-manage-header">
+
+            <h2>
+                🍱 Kelola Menu
+            </h2>
+
+            <button
+                class="add-product-button"
+                onclick="openProductModal()"
+            >
+                ➕ Tambah Menu
+            </button>
+
+        </div>
+
+        <div
+            class="manage-list"
+            id="manageList"
+        >
+            <div class="loading">
+                Memuat menu...
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MODAL PRODUK -->
+
+<div
+    class="modal"
+    id="productModal"
+>
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                ➕ Tambah Menu
+            </h2>
+
+            <button
+                class="modal-close"
+                onclick="closeProductModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div class="product-form">
+
+            <input
+                type="hidden"
+                id="productId"
+            >
+
+            <label for="productName">
+                Nama Menu
+            </label>
+
+            <input
+                id="productName"
+                type="text"
+                placeholder="Contoh: Rice Bowl Ayam Geprek"
+            >
+
+            <label for="productDescription">
+                Deskripsi
+            </label>
+
+            <textarea
+                id="productDescription"
+                rows="3"
+                placeholder="Contoh: Nasi, ayam geprek, dan sambal"
+            ></textarea>
+
+            <label for="productPrice">
+                Harga
+            </label>
+
+            <input
+                id="productPrice"
+                type="number"
+                min="0"
+                placeholder="Contoh: 10000"
+            >
+
+            <label for="productStock">
+                Stok
+            </label>
+
+            <input
+                id="productStock"
+                type="number"
+                min="0"
+                placeholder="Contoh: 20"
+            >
+
+            <label for="productImage">
+                Gambar
+            </label>
+
+            <input
+                id="productImage"
+                type="text"
+                placeholder="Contoh: ayam-geprek.png atau URL gambar"
+                oninput="previewProductImage()"
+            >
+
+            <img
+                id="productImagePreview"
+                class="product-image-preview"
+                alt="Preview gambar"
+            >
+
+            <div class="form-buttons">
+
+                <button
+                    class="cancel-product"
+                    onclick="closeProductModal()"
+                >
+                    Batal
+                </button>
+
+                <button
+                    class="save-product"
+                    id="saveProductButton"
+                    onclick="saveProduct()"
+                >
+                    💾 Simpan
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
 
@@ -808,6 +1219,8 @@ async function loadProducts(){
     products = data || [];
 
     renderStock();
+
+    renderManageProducts();
 
 }
 
@@ -1286,6 +1699,673 @@ function renderStock(){
                     >
 
                         ${stock} porsi
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+
+/* ==========================
+   PRODUCT MANAGEMENT
+========================== */
+
+function openProductModal(productId = null){
+
+    const modal =
+        document.getElementById("productModal");
+
+    const title =
+        document.getElementById("modalTitle");
+
+    document.getElementById("productId").value = "";
+    document.getElementById("productName").value = "";
+    document.getElementById("productDescription").value = "";
+    document.getElementById("productPrice").value = "";
+    document.getElementById("productStock").value = "";
+    document.getElementById("productImage").value = "";
+
+    const preview =
+        document.getElementById("productImagePreview");
+
+    preview.src = "";
+    preview.classList.remove("show");
+
+    if(productId !== null){
+
+        const product =
+            products.find(
+                item => Number(item.id) === Number(productId)
+            );
+
+        if(!product){
+            alert("Produk tidak ditemukan.");
+            return;
+        }
+
+        title.textContent = "✏️ Edit Menu";
+
+        document.getElementById("productId").value =
+            product.id;
+
+        document.getElementById("productName").value =
+            product.name || "";
+
+        document.getElementById("productDescription").value =
+            product.description || "";
+
+        document.getElementById("productPrice").value =
+            Number(product.price || 0);
+
+        document.getElementById("productStock").value =
+            Number(product.stock || 0);
+
+        document.getElementById("productImage").value =
+            product.image || "";
+
+        previewProductImage();
+
+    }
+
+    else{
+
+        title.textContent = "➕ Tambah Menu";
+
+    }
+
+    modal.classList.add("open");
+
+}
+
+
+function closeProductModal(){
+
+    document
+        .getElementById("productModal")
+        .classList.remove("open");
+
+}
+
+
+function previewProductImage(){
+
+    const input =
+        document.getElementById("productImage");
+
+    const preview =
+        document.getElementById("productImagePreview");
+
+    const value =
+        input.value.trim();
+
+    if(!value){
+
+        preview.src = "";
+        preview.classList.remove("show");
+        return;
+
+    }
+
+    preview.src = value;
+    preview.classList.add("show");
+
+    preview.onerror = function(){
+
+        preview.classList.remove("show");
+
+    };
+
+}
+
+
+async function saveProduct(){
+
+    const id =
+        document.getElementById("productId")
+        .value;
+
+    const name =
+        document.getElementById("productName")
+        .value
+        .trim();
+
+    const description =
+        document.getElementById("productDescription")
+        .value
+        .trim();
+
+    const price =
+        Number(
+            document.getElementById("productPrice")
+            .value
+        );
+
+    const stock =
+        Number(
+            document.getElementById("productStock")
+            .value
+        );
+
+    const image =
+        document.getElementById("productImage")
+        .value
+        .trim();
+
+    const button =
+        document.getElementById(
+            "saveProductButton"
+        );
+
+    if(!name){
+
+        alert("Nama menu harus diisi.");
+        return;
+
+    }
+
+    if(!Number.isFinite(price) || price < 0){
+
+        alert("Harga tidak valid.");
+        return;
+
+    }
+
+    if(!Number.isInteger(stock) || stock < 0){
+
+        alert("Stok harus berupa angka 0 atau lebih.");
+        return;
+
+    }
+
+    button.disabled = true;
+    button.textContent = "⏳ Menyimpan...";
+
+    try{
+
+        if(id){
+
+            const {
+                data,
+                error
+            } =
+                await database
+                .from("products")
+                .update({
+
+                    name:name,
+                    description:description,
+                    price:price,
+                    stock:stock,
+                    image:image
+
+                })
+                .eq("id", Number(id))
+                .select()
+                .single();
+
+            if(error)
+                throw error;
+
+            const index =
+                products.findIndex(
+                    product =>
+                    Number(product.id) === Number(id)
+                );
+
+            if(index !== -1)
+                products[index] = data;
+
+            alert("✅ Menu berhasil diperbarui.");
+
+        }
+
+        else{
+
+            const {
+                data,
+                error
+            } =
+                await database
+                .from("products")
+                .insert({
+
+                    name:name,
+                    description:description,
+                    price:price,
+                    stock:stock,
+                    image:image || null,
+                    active:true
+
+                })
+                .select()
+                .single();
+
+            if(error)
+                throw error;
+
+            products.push(data);
+
+            products.sort(
+                (a,b) =>
+                Number(a.id) - Number(b.id)
+            );
+
+            alert("✅ Menu berhasil ditambahkan.");
+
+        }
+
+        closeProductModal();
+
+        renderStock();
+
+        renderManageProducts();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "❌ Gagal menyimpan menu:\n\n" +
+            error.message
+        );
+
+    }
+
+    finally{
+
+        button.disabled = false;
+        button.textContent = "💾 Simpan";
+
+    }
+
+}
+
+
+async function addStock(productId){
+
+    const product =
+        products.find(
+            item =>
+            Number(item.id) === Number(productId)
+        );
+
+    if(!product)
+        return;
+
+    const jumlah =
+        prompt(
+            "Tambah berapa stok untuk " +
+            product.name +
+            "?\n\nStok sekarang: " +
+            Number(product.stock)
+        );
+
+    if(jumlah === null)
+        return;
+
+    const amount =
+        Number(jumlah);
+
+    if(!Number.isInteger(amount) || amount <= 0){
+
+        alert("Masukkan jumlah stok berupa angka lebih dari 0.");
+        return;
+
+    }
+
+    await updateProductStock(
+        productId,
+        Number(product.stock) + amount
+    );
+
+}
+
+
+async function setStock(productId){
+
+    const product =
+        products.find(
+            item =>
+            Number(item.id) === Number(productId)
+        );
+
+    if(!product)
+        return;
+
+    const value =
+        prompt(
+            "Masukkan stok baru untuk " +
+            product.name,
+            Number(product.stock)
+        );
+
+    if(value === null)
+        return;
+
+    const stock =
+        Number(value);
+
+    if(!Number.isInteger(stock) || stock < 0){
+
+        alert("Stok harus berupa angka 0 atau lebih.");
+        return;
+
+    }
+
+    await updateProductStock(
+        productId,
+        stock
+    );
+
+}
+
+
+async function updateProductStock(
+    productId,
+    stock
+){
+
+    const {
+        error
+    } =
+        await database
+        .from("products")
+        .update({
+            stock:stock
+        })
+        .eq(
+            "id",
+            Number(productId)
+        );
+
+    if(error){
+
+        console.error(error);
+
+        alert(
+            "❌ Gagal mengubah stok:\n\n" +
+            error.message
+        );
+
+        return;
+
+    }
+
+    const product =
+        products.find(
+            item =>
+            Number(item.id) === Number(productId)
+        );
+
+    if(product)
+        product.stock = stock;
+
+    renderStock();
+    renderManageProducts();
+
+}
+
+
+async function toggleProduct(productId){
+
+    const product =
+        products.find(
+            item =>
+            Number(item.id) === Number(productId)
+        );
+
+    if(!product)
+        return;
+
+    const newActive =
+        product.active !== true;
+
+    const action =
+        newActive
+        ? "mengaktifkan"
+        : "menonaktifkan";
+
+    const yakin =
+        confirm(
+            "Yakin ingin " +
+            action +
+            " menu " +
+            product.name +
+            "?"
+        );
+
+    if(!yakin)
+        return;
+
+    const {
+        error
+    } =
+        await database
+        .from("products")
+        .update({
+            active:newActive
+        })
+        .eq(
+            "id",
+            Number(productId)
+        );
+
+    if(error){
+
+        console.error(error);
+
+        alert(
+            "❌ Gagal mengubah status menu:\n\n" +
+            error.message
+        );
+
+        return;
+
+    }
+
+    product.active = newActive;
+
+    renderManageProducts();
+
+}
+
+
+async function deleteProduct(productId){
+
+    const product =
+        products.find(
+            item =>
+            Number(item.id) === Number(productId)
+        );
+
+    if(!product)
+        return;
+
+    const yakin =
+        confirm(
+            "Hapus menu \"" +
+            product.name +
+            "\"?\n\n" +
+            "Data menu akan dihapus permanen."
+        );
+
+    if(!yakin)
+        return;
+
+    const {
+        error
+    } =
+        await database
+        .from("products")
+        .delete()
+        .eq(
+            "id",
+            Number(productId)
+        );
+
+    if(error){
+
+        console.error(error);
+
+        alert(
+            "❌ Gagal menghapus menu:\n\n" +
+            error.message
+        );
+
+        return;
+
+    }
+
+    products =
+        products.filter(
+            item =>
+            Number(item.id) !== Number(productId)
+        );
+
+    renderStock();
+    renderManageProducts();
+
+    alert("✅ Menu berhasil dihapus.");
+
+}
+
+
+function renderManageProducts(){
+
+    const container =
+        document.getElementById("manageList");
+
+    if(!container)
+        return;
+
+    if(products.length === 0){
+
+        container.innerHTML =
+            `<div class="empty">
+                Belum ada menu.
+            </div>`;
+
+        return;
+
+    }
+
+    container.innerHTML =
+        products.map(product => {
+
+            const active =
+                product.active === true;
+
+            return `
+
+                <div class="manage-card">
+
+                    <div class="manage-top">
+
+                        <div>
+
+                            <div class="manage-name">
+
+                                ${escapeHTML(
+                                    product.name
+                                )}
+
+                            </div>
+
+                            <div class="manage-description">
+
+                                ${escapeHTML(
+                                    product.description || "Tidak ada deskripsi."
+                                )}
+
+                            </div>
+
+                            <div class="manage-price">
+
+                                Rp${Number(
+                                    product.price || 0
+                                ).toLocaleString("id-ID")}
+
+                            </div>
+
+                            <div class="manage-stock">
+
+                                📦 Stok:
+                                <b>
+                                    ${Number(product.stock || 0)}
+                                </b>
+                                porsi
+
+                            </div>
+
+                        </div>
+
+                        <div>
+
+                            ${
+                                active
+                                ?
+                                `<span class="active-badge">
+                                    🟢 Aktif
+                                </span>`
+                                :
+                                `<span class="inactive-badge">
+                                    ⚫ Nonaktif
+                                </span>`
+                            }
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="manage-actions">
+
+                        <button
+                            class="manage-button edit-product"
+                            onclick="openProductModal(${product.id})"
+                        >
+                            ✏️ Edit Menu
+                        </button>
+
+                        <button
+                            class="manage-button stock-product"
+                            onclick="addStock(${product.id})"
+                        >
+                            ➕ Tambah Stok
+                        </button>
+
+                        <button
+                            class="manage-button stock-product"
+                            onclick="setStock(${product.id})"
+                        >
+                            📦 Ubah Stok
+                        </button>
+
+                        <button
+                            class="manage-button toggle-product"
+                            onclick="toggleProduct(${product.id})"
+                        >
+                            ${
+                                active
+                                ? "⚫ Nonaktifkan"
+                                : "🟢 Aktifkan"
+                            }
+                        </button>
+
+                        <button
+                            class="manage-button delete-product"
+                            onclick="deleteProduct(${product.id})"
+                        >
+                            🗑 Hapus Menu
+                        </button>
 
                     </div>
 
