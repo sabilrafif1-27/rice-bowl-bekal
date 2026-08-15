@@ -97,7 +97,7 @@ const container=document.getElementById('products');
 if(products.length===0){container.innerHTML='<div class="loading">🍱 Belum ada menu.</div>';return}
 container.innerHTML=products.map(p=>{
 const s=Number(p.stock);
-return `<div class="card"><div class="photo">${p.image_url?`<img src="${escapeHTML(p.image_url)}" alt="${escapeHTML(p.name)}">`:`<div style="height:100%;display:flex;align-items:center;justify-content:center;font-size:70px">🍱</div>`}<div class="tag">${s<=0?'HABIS':'TERSEDIA'}</div></div><div class="info"><h3>${escapeHTML(p.name)}</h3><div class="desc">${escapeHTML(p.description||'Menu lezat untuk bekal sekolah.')}</div><div class="price">Rp${Number(p.price).toLocaleString('id-ID')}</div><div class="stock">${s>0?'📦 Stok: ':'❌ '}<b>${s}</b>${s>0?' porsi':' HABIS'}</div><button class="add-button" ${s<=0?'disabled':''} onclick="addToCart(${p.id})">${s<=0?'HABIS':'＋ Tambah ke Keranjang'}</button></div></div>`
+return `<div class="card"><div class="photo">${p.image_url?`<img src="${escapeHTML(p.image_url)}" alt="${escapeHTML(p.name)}" loading="lazy">`:`<div style="height:100%;display:flex;align-items:center;justify-content:center;font-size:70px">🍱</div>`}<div class="tag">${s<=0?'HABIS':'TERSEDIA'}</div></div><div class="info"><h3>${escapeHTML(p.name)}</h3><div class="desc">${escapeHTML(p.description||'Menu lezat untuk bekal sekolah.')}</div><div class="price">Rp${Number(p.price).toLocaleString('id-ID')}</div><div class="stock">${s>0?'📦 Stok: ':'❌ '}<b>${s}</b>${s>0?' porsi':' HABIS'}</div><button class="add-button" ${s<=0?'disabled':''} onclick="addToCart(${p.id})">${s<=0?'HABIS':'＋ Tambah ke Keranjang'}</button></div></div>`
 }).join('')
 }
 
