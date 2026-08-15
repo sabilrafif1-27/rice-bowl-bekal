@@ -1,171 +1,196 @@
 <!DOCTYPE html>
 <html lang="id">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>Bekal Sekolah 🍱</title>
-        <style>
-            *{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;background:#fff8ef;color:#382018}button,input,textarea{font:inherit}header{position:sticky;top:0;z-index:50;background:#ff6b35;color:#fff;padding:14px 6%;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 15px #0002}.logo{font-size:21px;font-weight:900}.cart-button{border:0;background:#fff;color:#e95725;padding:10px 16px;border-radius:25px;font-weight:bold;cursor:pointer}.hero{min-height:520px;padding:65px 7%;display:flex;align-items:center;justify-content:space-between;gap:30px;color:#fff;position:relative;overflow:hidden;background:radial-gradient(circle at 85% 20%,#fff3 0 70px,transparent 71px),linear-gradient(135deg,#ff6b35,#ff9f1c)}.hero:before,.hero:after{content:"";position:absolute;border:2px solid #fff3;border-radius:50%}.hero:before{width:320px;height:320px;right:-130px;bottom:-150px}.hero:after{width:160px;height:160px;left:-80px;top:-70px}.hero-text{max-width:650px;z-index:2}.badge{display:inline-block;padding:8px 14px;border:1px solid #fff5;background:#fff2;border-radius:25px;font-size:13px;font-weight:bold;margin-bottom:18px}.hero h1{font-size:clamp(38px,6vw,66px);line-height:1.04;margin-bottom:18px}.hero h1 span{color:#fff0a8}.hero p{font-size:18px;line-height:1.7}.hero-actions{display:flex;gap:12px;margin-top:25px;flex-wrap:wrap}.primary,.secondary{border:0;padding:14px 20px;border-radius:14px;font-weight:900;cursor:pointer}.primary{background:#fff;color:#ff6b35}.secondary{background:#0002;color:#fff;border:1px solid #fff5}}.decor{position:absolute;font-size:38px;opacity:.25;animation:float 4s ease-in-out infinite}.d1{right:25%;top:15%}.d2{right:9%;bottom:24%;animation-delay:1s}.d3{left:45%;bottom:10%;animation-delay:2s}.menu{padding:65px 7%}.title{text-align:center;margin-bottom:35px}.mini{color:#ff6b35;font-weight:900;font-size:13px;letter-spacing:1px}.title h2{font-size:34px;margin-top:7px}.title p{color:#777;margin-top:8px}.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:25px;max-width:1150px;margin:auto}.card{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 8px 28px #0001;transition:.25s}.card:hover{transform:translateY(-7px);box-shadow:0 15px 35px #0002}.photo{height:270px;background:#ffe2bc;position:relative;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover;transition:.4s}.card:hover .photo img{transform:scale(1.06)}.tag{position:absolute;z-index:2;left:14px;top:14px;background:#ff6b35;color:#fff;padding:7px 11px;border-radius:20px;font-size:12px;font-weight:bold}.info{padding:20px}.info h3{font-size:21px;margin-bottom:7px}.desc{color:#777;line-height:1.5;font-size:14px;min-height:42px}.price{color:#f4511e;font-size:22px;font-weight:900;margin-top:12px}.stock{margin-top:7px;color:#555}.add-button{width:100%;border:0;background:#ff6b35;color:#fff;padding:13px;border-radius:12px;margin-top:15px;font-weight:bold;cursor:pointer}.add-button:disabled{background:#aaa;cursor:not-allowed}.loading{text-align:center;padding:50px;color:#777;grid-column:1/-1}.why{padding:55px 7%;background:#fff}.features{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.feature{padding:24px;text-align:center;border-radius:20px;background:#fff8ef;border:1px solid #ffe2cf}.feature-icon{font-size:40px;margin-bottom:10px}.feature h3{margin-bottom:7px}.feature p{color:#777;font-size:14px;line-height:1.5}.cart{position:fixed;right:-430px;top:0;width:400px;max-width:100%;height:100vh;background:#fff;z-index:100;padding:25px;box-shadow:-7px 0 25px #0003;transition:.3s;overflow:auto}.cart.open{right:0}.cart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.close-button{border:0;background:none;font-size:30px;cursor:pointer}.cart-item{padding:15px 0;border-bottom:1px solid #eee}.quantity{display:flex;align-items:center;gap:12px;margin-top:10px}.quantity button{border:0;background:#ff6b35;color:#fff;border-radius:50%;width:30px;height:30px;cursor:pointer;font-weight:bold}.total{font-size:21px;font-weight:bold;margin-top:20px}.order-form{margin-top:25px}.order-form h3{margin-bottom:15px}.order-form input,.order-form textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-bottom:10px}.order-button{width:100%;border:0;background:#25d366;color:#fff;padding:14px;border-radius:12px;font-weight:bold;cursor:pointer}.order-button:disabled{background:#aaa}.message{margin-top:12px;padding:12px;border-radius:10px;display:none;line-height:1.5}.success{display:block;background:#e9f9ed;color:#176b2c}.error{display:block;background:#ffe8e8;color:#a52222}footer{background:#382018;color:#fff;text-align:center;padding:30px;margin-top:20px}.footer-logo{font-size:22px;font-weight:900;margin-bottom:7px}.small{color:#ddd;font-size:13px}
-.hero-bowl{
-    width:420px;
-    max-width:46%;
-    z-index:2;
-    animation:nasiGoyang 3.2s ease-in-out infinite;
-    filter:drop-shadow(0 18px 18px rgba(0,0,0,.22));
-}
-
-.hero-bowl img{
-    width:100%;
-    height:auto;
-    display:block;
-}
-
-@keyframes nasiGoyang{
-    0%{
-        transform:scale(.96) translateY(0) rotate(0deg);
-    }
-    20%{
-        transform:scale(1.02) translateY(-4px) rotate(1deg);
-    }
-    40%{
-        transform:scale(1.06) translateY(0) rotate(-1deg);
-    }
-    60%{
-        transform:scale(1.03) translateY(-8px) rotate(1deg);
-    }
-    80%{
-        transform:scale(1.01) translateY(-3px) rotate(-.5deg);
-    }
-    100%{
-        transform:scale(.96) translateY(0) rotate(0deg);
-    }
-}
-@media(max-width:700px){
-  .hero{min-height:600px;padding:50px 6%;text-align:center;flex-direction:column;justify-content:center}.hero p{font-size:16px}.hero-actions{justify-content:center}.features{grid-template-columns:1fr}.menu{padding:50px 6%}.cart{width:100%}}
-    
-
-
-
-
-
-
-    20%{
-        transform:scale(1.02) translateY(-4px) rotate(1deg);
-    }
-
-    40%{
-        transform:scale(1.05) translateY(0) rotate(-1deg);
-    }
-
-    60%{
-        transform:scale(1.02) translateY(-7px) rotate(1deg);
-    }
-
-    80%{
-        transform:scale(1) translateY(-3px) rotate(-.5deg);
-    }
-
-    100%{
-        transform:scale(.96) translateY(0) rotate(0deg);
-    }
-}
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bekal Sekolah 🍱</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#fff8ef;color:#382018}
+button,input,textarea{font:inherit}
+header{position:sticky;top:0;z-index:50;background:#ff6b35;color:#fff;padding:14px 6%;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 15px #0002}
+.logo{font-size:21px;font-weight:900}.cart-button{border:0;background:#fff;color:#e95725;padding:10px 16px;border-radius:25px;font-weight:bold;cursor:pointer}
+.hero{min-height:520px;padding:65px 7%;display:flex;align-items:center;justify-content:space-between;gap:30px;color:#fff;position:relative;overflow:hidden;background:linear-gradient(135deg,#ff6b35,#ff9f1c)}
+.hero:before,.hero:after{content:"";position:absolute;border:2px solid #fff3;border-radius:50%}.hero:before{width:320px;height:320px;right:-130px;bottom:-150px}.hero:after{width:160px;height:160px;left:-80px;top:-70px}
+.hero-text{max-width:650px;z-index:2}.badge{display:inline-block;padding:8px 14px;border:1px solid #fff5;background:#fff2;border-radius:25px;font-size:13px;font-weight:bold;margin-bottom:18px}
+.hero h1{font-size:clamp(38px,6vw,66px);line-height:1.04;margin-bottom:18px}.hero h1 span{color:#fff0a8}.hero p{font-size:18px;line-height:1.7}
+.hero-actions{display:flex;gap:12px;margin-top:25px;flex-wrap:wrap}.primary,.secondary{border:0;padding:14px 20px;border-radius:14px;font-weight:900;cursor:pointer}.primary{background:#fff;color:#ff6b35}.secondary{background:#0002;color:#fff;border:1px solid #fff5}
+.decor{position:absolute;font-size:38px;opacity:.25;animation:float 4s ease-in-out infinite}.d1{right:25%;top:15%}.d2{right:9%;bottom:24%;animation-delay:1s}.d3{left:45%;bottom:10%;animation-delay:2s}
+@keyframes float{50%{transform:translateY(-12px) rotate(2deg)}}
+.hero-bowl{width:420px;max-width:46%;z-index:2;animation:nasiGoyang 3.2s ease-in-out infinite;filter:drop-shadow(0 18px 18px rgba(0,0,0,.22))}
+.hero-bowl img{width:100%;height:auto;display:block}
+@keyframes nasiGoyang{0%{transform:scale(.96) translateY(0) rotate(0deg)}20%{transform:scale(1.02) translateY(-4px) rotate(1deg)}40%{transform:scale(1.06) translateY(0) rotate(-1deg)}60%{transform:scale(1.03) translateY(-8px) rotate(1deg)}80%{transform:scale(1.01) translateY(-3px) rotate(-.5deg)}100%{transform:scale(.96) translateY(0) rotate(0deg)}}
+.menu{padding:65px 7%}.title{text-align:center;margin-bottom:35px}.mini{color:#ff6b35;font-weight:900;font-size:13px;letter-spacing:1px}.title h2{font-size:34px;margin-top:7px}.title p{color:#777;margin-top:8px}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:25px;max-width:1150px;margin:auto}.card{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 8px 28px #0001;transition:.25s}.card:hover{transform:translateY(-7px);box-shadow:0 15px 35px #0002}.photo{height:270px;background:#ffe2bc;position:relative;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover;transition:.4s}.card:hover .photo img{transform:scale(1.06)}.tag{position:absolute;z-index:2;left:14px;top:14px;background:#ff6b35;color:#fff;padding:7px 11px;border-radius:20px;font-size:12px;font-weight:bold}.info{padding:20px}.info h3{font-size:21px;margin-bottom:7px}.desc{color:#777;line-height:1.5;font-size:14px;min-height:42px}.price{color:#f4511e;font-size:22px;font-weight:900;margin-top:12px}.stock{margin-top:7px;color:#555}.add-button{width:100%;border:0;background:#ff6b35;color:#fff;padding:13px;border-radius:12px;margin-top:15px;font-weight:bold;cursor:pointer}.add-button:disabled{background:#aaa;cursor:not-allowed}.loading{text-align:center;padding:50px;color:#777;grid-column:1/-1}
+.why{padding:55px 7%;background:#fff}.features{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.feature{padding:24px;text-align:center;border-radius:20px;background:#fff8ef;border:1px solid #ffe2cf}.feature-icon{font-size:40px;margin-bottom:10px}.feature h3{margin-bottom:7px}.feature p{color:#777;font-size:14px;line-height:1.5}
+.cart{position:fixed;right:-430px;top:0;width:400px;max-width:100%;height:100vh;background:#fff;z-index:100;padding:25px;box-shadow:-7px 0 25px #0003;transition:.3s;overflow:auto}.cart.open{right:0}.cart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.close-button{border:0;background:none;font-size:30px;cursor:pointer}.cart-item{padding:15px 0;border-bottom:1px solid #eee}.quantity{display:flex;align-items:center;gap:12px;margin-top:10px}.quantity button{border:0;background:#ff6b35;color:#fff;border-radius:50%;width:30px;height:30px;cursor:pointer;font-weight:bold}.total{font-size:21px;font-weight:bold;margin-top:20px}.order-form{margin-top:25px}.order-form h3{margin-bottom:15px}.order-form input,.order-form textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-bottom:10px}.order-button{width:100%;border:0;background:#25d366;color:#fff;padding:14px;border-radius:12px;font-weight:bold;cursor:pointer}.order-button:disabled{background:#aaa}.message{margin-top:12px;padding:12px;border-radius:10px;display:none;line-height:1.5}.success{display:block;background:#e9f9ed;color:#176b2c}.error{display:block;background:#ffe8e8;color:#a52222}
+footer{background:#382018;color:#fff;text-align:center;padding:30px;margin-top:20px}.footer-logo{font-size:22px;font-weight:900;margin-bottom:7px}.small{color:#ddd;font-size:13px}
+@media(max-width:700px){.hero{min-height:600px;padding:50px 6%;text-align:center;flex-direction:column;justify-content:center}.hero p{font-size:16px}.hero-actions{justify-content:center}.hero-bowl{width:290px;max-width:82%}.features{grid-template-columns:1fr}.menu{padding:50px 6%}.cart{width:100%}}
 </style>
-    </head>
-        <body>
-            <header>
-                <div class="logo">🍱 Bekal Sekolah</div>
-                    <button class="cart-button" onclick="openCart()">🛒 Keranjang (<span id="cartCount">0</span>)</button>
-                    </header>
-                        <section class="hero">
-                            <span class="decor d1">🥢</span>
-                                <span class="decor d2">🍗</span>
-                                    <span class="decor d3">✨</span>
-                                        <div class="hero-text">
-                                            <div class="badge">✨ BEKAL ENAK • PRAKTIS • SIAP DINIKMATI</div>
-                                                <h1>Bekal enak,<br>
-                                                    <span>semangat sekolah!</span> 🍱</h1>
-                                                        <p>Rice bowl praktis dan lezat untuk menemani aktivitas sekolahmu. Pilih menu favorit, masukkan ke keranjang, lalu pesan.</p>
-                                                            <div class="hero-actions">
-                                                                <button class="primary" onclick="document.getElementById('menuSection').scrollIntoView()">🍱 Lihat Menu</button>
-                                                                    <button class="secondary" onclick="openCart()">🛒 Keranjang</button>
-                                                                    </div>
-                                                                    </div>
-                                                                        <div class="hero-bowl">
-    <img
-        src="nasi-ayam-suwir.png"
-        alt="Nasi Ayam Suwir"
-    >
+</head>
+<body>
+<header>
+<div class="logo">🍱 Bekal Sekolah</div>
+<button class="cart-button" onclick="openCart()">🛒 Keranjang (<span id="cartCount">0</span>)</button>
+</header>
+
+<section class="hero">
+<span class="decor d1">🥢</span><span class="decor d2">🍗</span><span class="decor d3">✨</span>
+<div class="hero-text">
+<div class="badge">✨ BEKAL ENAK • PRAKTIS • SIAP DINIKMATI</div>
+<h1>Bekal enak,<br><span>semangat sekolah!</span> 🍱</h1>
+<p>Rice bowl praktis dan lezat untuk menemani aktivitas sekolahmu. Pilih menu favorit, masukkan ke keranjang, lalu pesan.</p>
+<div class="hero-actions"><button class="primary" onclick="document.getElementById('menuSection').scrollIntoView()">🍱 Lihat Menu</button><button class="secondary" onclick="openCart()">🛒 Keranjang</button></div>
 </div>
-                                                                        </section>
-                                                                            <section class="menu" id="menuSection">
-                                                                                <div class="title">
-                                                                                    <div class="mini">🍴 PILIH FAVORITMU</div>
-                                                                                        <h2>Menu Hari Ini</h2>
-                                                                                            <p>Stok dan harga diperbarui langsung.</p>
-                                                                                            </div>
-                                                                                                <div class="products" id="products">
-                                                                                                    <div class="loading">⏳ Memuat menu...</div>
-                                                                                                    </div>
-                                                                                                    </section>
-                                                                                                        <section class="why">
-                                                                                                            <div class="title">
-                                                                                                                <div class="mini">❤️ KENAPA RICE BOWL BEKAL?</div>
-                                                                                                                    <h2>Dibuat untuk hari sekolah</h2>
-                                                                                                                    </div>
-                                                                                                                        <div class="features">
-                                                                                                                            <div class="feature">
-                                                                                                                                <div class="feature-icon">🍱</div>
-                                                                                                                                    <h3>Praktis</h3>
-                                                                                                                                        <p>Mudah dipesan dan cocok untuk bekal sekolah.</p>
-                                                                                                                                        </div>
-                                                                                                                                            <div class="feature">
-                                                                                                                                                <div class="feature-icon">🔥</div>
-                                                                                                                                                    <h3>Lezat</h3>
-                                                                                                                                                        <p>Pilihan menu yang bikin waktu makan jadi lebih menyenangkan.</p>
-                                                                                                                                                        </div>
-                                                                                                                                                            <div class="feature">
-                                                                                                                                                                <div class="feature-icon">⚡</div>
-                                                                                                                                                                    <h3>Gampang Pesan</h3>
-                                                                                                                                                                        <p>Pilih menu, isi data, lalu pesanan dikirim lewat WhatsApp.</p>
-                                                                                                                                                                        </div>
-                                                                                                                                                                        </div>
-                                                                                                                                                                        </section>
-                                                                                                                                                                            <div class="cart" id="cart">
-                                                                                                                                                                                <div class="cart-header">
-                                                                                                                                                                                    <h2>🛒 Keranjang</h2>
-                                                                                                                                                                                        <button class="close-button" onclick="closeCart()">×</button>
-                                                                                                                                                                                        </div>
-                                                                                                                                                                                            <div id="cartItems">
-                                                                                                                                                                                                <p>Keranjang masih kosong.</p>
-                                                                                                                                                                                                </div>
-                                                                                                                                                                                                    <div class="total">Total: <span id="total">Rp0</span>
-                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                        <div class="order-form">
-                                                                                                                                                                                                            <h3>📝 Data Pesanan</h3>
-                                                                                                                                                                                                                <input id="customerName" type="text" placeholder="Nama pembeli">
-                                                                                                                                                                                                                <input id="customerClass" type="text" placeholder="Kelas">
-                                                                                                                                                                                                                <textarea id="note" rows="3" placeholder="Catatan pesanan">
-                                                                                                                                                                                                                </textarea>
-                                                                                                                                                                                                                    <button class="order-button" id="orderButton" onclick="createOrder()">📱 Pesan Sekarang</button>
-                                                                                                                                                                                                                        <div id="message" class="message">
-                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                            <footer>
-                                                                                                                                                                                                                                <div class="footer-logo">🍱 Bekal Sekolah</div>
-                                                                                                                                                                                                                                    <p class="small">Bekal enak untuk menemani hari sekolah ❤️</p>
-                                                                                                                                                                                                                                        <p class="small" style="margin-top:8px">© 2026 Bekal Sekolah</p>
-                                                                                                                                                                                                                                        </footer>
-                                                                                                                                                                                                                                            <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script>
-                                                                                                                                                                                                                                            const database=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);let products=[],cart=[];
-                                                                                                                                                                                                                                            async function loadProducts(){const c=document.getElementById('products');c.innerHTML='<div class="loading">⏳ Memuat menu...</div>';const{data,error}=await database.from('products').select('*').eq('active',true).order('id');if(error){console.error(error);c.innerHTML='<div class="loading">❌ Gagal mengambil menu.<br><br>Coba refresh halaman.</div>';return}products=data||[];renderProducts()}
-                                                                                                                                                                                                                                            function renderProducts(){const c=document.getElementById('products');if(!products.length){c.innerHTML='<div class="loading">🍱 Belum ada menu hari ini.</div>';return}c.innerHTML=products.map((p,i)=>{const s=Number(p.stock);return `<div class="card"><div class="photo">${i===0&&s>0?'<div class="tag">🔥 Favorit</div>':''}<img src="${p.image||'ayam-suwir.png'}" alt="${escapeHTML(p.name)}"></div><div class="info"><h3>${escapeHTML(p.name)}</h3><p class="desc">${escapeHTML(p.description||'Rice bowl lezat untuk bekal sekolah.')}</p><div class="price">Rp${Number(p.price).toLocaleString('id-ID')}</div><div class="stock">${s>0?'📦 Stok: ':'❌ '}<b>${s}</b>${s>0?' porsi':' HABIS'}</div><button class="add-button" ${s<=0?'disabled':''} onclick="addToCart(${p.id})">${s<=0?'HABIS':'＋ Tambah ke Keranjang'}</button></div></div>`}).join('')}
-                                                                                                                                                                                                                                            function addToCart(id){const p=products.find(x=>x.id===id);if(!p)return;if(Number(p.stock)<=0){showMessage('Stok produk sudah habis.','error');return}const x=cart.find(i=>i.id===id);if(x){if(x.quantity>=Number(p.stock)){alert('Jumlah melebihi stok.');return}x.quantity++}else cart.push({id:p.id,name:p.name,price:Number(p.price),quantity:1});renderCart();openCart()}
-                                                                                                                                                                                                                                            function increaseQuantity(i){const x=cart[i],p=products.find(y=>y.id===x.id);if(x.quantity>=Number(p.stock)){alert('Jumlah melebihi stok.');return}x.quantity++;renderCart()}
-                                                                                                                                                                                                                                            function decreaseQuantity(i){cart[i].quantity--;if(cart[i].quantity<=0)cart.splice(i,1);renderCart()}
-                                                                                                                                                                                                                                            function renderCart(){const c=document.getElementById('cartItems');const n=cart.reduce((s,i)=>s+i.quantity,0);document.getElementById('cartCount').textContent=n;if(!cart.length){c.innerHTML='<p>Keranjang masih kosong.</p>';document.getElementById('total').textContent='Rp0';return}let t=0;c.innerHTML=cart.map((x,i)=>{t+=x.price*x.quantity;return `<div class="cart-item"><b>${escapeHTML(x.name)}</b><p>Rp${x.price.toLocaleString('id-ID')}</p><div class="quantity"><button onclick="decreaseQuantity(${i})">−</button><b>${x.quantity}</b><button onclick="increaseQuantity(${i})">+</button></div></div>`}).join('');document.getElementById('total').textContent='Rp'+t.toLocaleString('id-ID')}
-                                                                                                                                                                                                                                            async function createOrder(){const name=document.getElementById('customerName').value.trim(),customerClass=document.getElementById('customerClass').value.trim(),note=document.getElementById('note').value.trim(),button=document.getElementById('orderButton');if(!cart.length){showMessage('Keranjang masih kosong.','error');return}if(!name){showMessage('Nama pembeli harus diisi.','error');return}if(!customerClass){showMessage('Kelas harus diisi.','error');return}button.disabled=true;button.textContent='⏳ Menyimpan pesanan...';try{const ids=cart.map(i=>i.id);const{data:latestProducts,error:stockError}=await database.from('products').select('*').in('id',ids);if(stockError)throw stockError;for(const item of cart){const latest=latestProducts.find(p=>p.id===item.id);if(!latest||Number(latest.stock)<item.quantity)throw new Error(`Stok ${item.name} tidak mencukupi.`)}for(const item of cart){const product=latestProducts.find(p=>p.id===item.id);const total=Number(item.price)*item.quantity;const{error:orderError}=await database.from('orders').insert({customer_name:name,customer_class:customerClass,product_name:item.name,quantity:item.quantity,total,note,status:'Baru'});if(orderError)throw orderError;const{error:updateError}=await database.from('products').update({stock:Number(product.stock)-item.quantity}).eq('id',item.id);if(updateError)throw updateError}let message='Halo, saya mau pesan Bekal Sekolah.%0A%0A';message+='Nama: '+encodeURIComponent(name)+'%0A';message+='Kelas: '+encodeURIComponent(customerClass)+'%0A%0A';message+='Pesanan:%0A';cart.forEach(i=>message+='- '+encodeURIComponent(i.name)+' x'+i.quantity+'%0A');const total=cart.reduce((s,i)=>s+i.price*i.quantity,0);message+='%0ATotal: Rp'+total.toLocaleString('id-ID');if(note)message+='%0A%0ACatatan: '+encodeURIComponent(note);showMessage('Pesanan berhasil disimpan! WhatsApp akan dibuka.','success');cart=[];renderCart();await loadProducts();button.textContent='✅ Pesanan Berhasil';setTimeout(()=>{window.open('https://wa.me/6285245570300?text='+message,'_blank');button.disabled=false;button.textContent='📱 Pesan Sekarang'},1000)}catch(e){console.error(e);showMessage('Pesanan gagal: '+e.message,'error');button.disabled=false;button.textContent='📱 Pesan Sekarang'}}
-                                                                                                                                                                                                                                            function showMessage(t,type){const b=document.getElementById('message');b.textContent=t;b.className='message '+type;setTimeout(()=>b.className='message',5000)}function openCart(){document.getElementById('cart').classList.add('open')}function closeCart(){document.getElementById('cart').classList.remove('open')}function escapeHTML(t){return String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}loadProducts();renderCart();
-                                                                                                                                                                                                                                    </script>
-                                                                                                                                                                                                                                    </body>
-                                                                                                                                                                                                                                    </html>
+<div class="hero-bowl"><img src="nasi-ayam-suwir.png" alt="Nasi Ayam Suwir"></div>
+</section>
+
+<section class="menu" id="menuSection">
+<div class="title"><div class="mini">🍴 PILIH FAVORITMU</div><h2>Menu Hari Ini</h2><p>Stok dan harga diperbarui langsung.</p></div>
+<div class="products" id="products"><div class="loading">⏳ Memuat menu...</div></div>
+</section>
+
+<section class="why">
+<div class="title"><div class="mini">❤️ KENAPA BEKAL SEKOLAH?</div><h2>Dibuat untuk hari sekolah</h2></div>
+<div class="features">
+<div class="feature"><div class="feature-icon">🍱</div><h3>Praktis</h3><p>Mudah dipesan dan cocok untuk bekal sekolah.</p></div>
+<div class="feature"><div class="feature-icon">🔥</div><h3>Lezat</h3><p>Pilihan menu yang bikin waktu makan jadi lebih menyenangkan.</p></div>
+<div class="feature"><div class="feature-icon">⚡</div><h3>Gampang Pesan</h3><p>Pilih menu, isi data, lalu pesanan dikirim lewat WhatsApp.</p></div>
+</div>
+</section>
+
+<div class="cart" id="cart">
+<div class="cart-header"><h2>🛒 Keranjang</h2><button class="close-button" onclick="closeCart()">×</button></div>
+<div id="cartItems"><p>Keranjang masih kosong.</p></div>
+<div class="total">Total: <span id="total">Rp0</span></div>
+<div class="order-form">
+<h3>📝 Data Pesanan</h3>
+<input id="customerName" type="text" placeholder="Nama pembeli">
+<input id="customerClass" type="text" placeholder="Kelas">
+<textarea id="note" rows="3" placeholder="Catatan pesanan"></textarea>
+<button class="order-button" id="orderButton" onclick="createOrder()">📱 Pesan Sekarang</button>
+<div id="message" class="message"></div>
+</div>
+</div>
+
+<footer><div class="footer-logo">🍱 Bekal Sekolah</div><p class="small">Bekal enak untuk menemani hari sekolah ❤️</p><p class="small" style="margin-top:8px">© 2026 Bekal Sekolah</p></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script>
+const database=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+let products=[],cart=[];
+
+function openCart(){document.getElementById('cart').classList.add('open')}
+function closeCart(){document.getElementById('cart').classList.remove('open')}
+function showMessage(t,type){const b=document.getElementById('message');b.textContent=t;b.className='message '+type}
+function escapeHTML(text){return String(text??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+
+async function loadProducts(){
+const {data,error}=await database.from('products').select('*').order('id',{ascending:true});
+if(error){console.error(error);document.getElementById('products').innerHTML='<div class="loading">❌ Gagal memuat menu.</div>';return}
+products=data||[];renderProducts()
+}
+
+function renderProducts(){
+const container=document.getElementById('products');
+if(products.length===0){container.innerHTML='<div class="loading">🍱 Belum ada menu.</div>';return}
+container.innerHTML=products.map(p=>{
+const s=Number(p.stock);
+return `<div class="card"><div class="photo">${p.image_url?`<img src="${escapeHTML(p.image_url)}" alt="${escapeHTML(p.name)}">`:`<div style="height:100%;display:flex;align-items:center;justify-content:center;font-size:70px">🍱</div>`}<div class="tag">${s<=0?'HABIS':'TERSEDIA'}</div></div><div class="info"><h3>${escapeHTML(p.name)}</h3><div class="desc">${escapeHTML(p.description||'Menu lezat untuk bekal sekolah.')}</div><div class="price">Rp${Number(p.price).toLocaleString('id-ID')}</div><div class="stock">${s>0?'📦 Stok: ':'❌ '}<b>${s}</b>${s>0?' porsi':' HABIS'}</div><button class="add-button" ${s<=0?'disabled':''} onclick="addToCart(${p.id})">${s<=0?'HABIS':'＋ Tambah ke Keranjang'}</button></div></div>`
+}).join('')
+}
+
+function addToCart(id){
+const p=products.find(x=>x.id===id);if(!p)return;
+if(Number(p.stock)<=0){showMessage('Stok produk sudah habis.','error');return}
+const x=cart.find(i=>i.id===id);
+if(x){if(x.quantity>=Number(p.stock)){alert('Jumlah melebihi stok.');return}x.quantity++}
+else cart.push({id:p.id,name:p.name,price:Number(p.price),quantity:1});
+renderCart();openCart()
+}
+
+function increaseQuantity(i){
+const x=cart[i],p=products.find(y=>y.id===x.id);
+if(x.quantity>=Number(p.stock)){alert('Jumlah melebihi stok.');return}
+x.quantity++;renderCart()
+}
+function decreaseQuantity(i){cart[i].quantity--;if(cart[i].quantity<=0)cart.splice(i,1);renderCart()}
+
+function renderCart(){
+const c=document.getElementById('cartItems');
+const n=cart.reduce((s,i)=>s+i.quantity,0);
+document.getElementById('cartCount').textContent=n;
+if(!cart.length){c.innerHTML='<p>Keranjang masih kosong.</p>';document.getElementById('total').textContent='Rp0';return}
+let t=0;
+c.innerHTML=cart.map((x,i)=>{t+=x.price*x.quantity;return `<div class="cart-item"><b>${escapeHTML(x.name)}</b><p>Rp${x.price.toLocaleString('id-ID')}</p><div class="quantity"><button onclick="decreaseQuantity(${i})">−</button><b>${x.quantity}</b><button onclick="increaseQuantity(${i})">+</button></div></div>`}).join('');
+document.getElementById('total').textContent='Rp'+t.toLocaleString('id-ID')
+}
+
+async function createOrder(){
+const name=document.getElementById('customerName').value.trim();
+const customerClass=document.getElementById('customerClass').value.trim();
+const note=document.getElementById('note').value.trim();
+const button=document.getElementById('orderButton');
+
+if(!cart.length){showMessage('Keranjang masih kosong.','error');return}
+if(!name){showMessage('Nama pembeli harus diisi.','error');return}
+if(!customerClass){showMessage('Kelas harus diisi.','error');return}
+
+button.disabled=true;button.textContent='⏳ Menyimpan pesanan...';
+
+try{
+const ids=cart.map(i=>i.id);
+const {data:latestProducts,error:stockError}=await database.from('products').select('*').in('id',ids);
+if(stockError)throw stockError;
+
+for(const item of cart){
+const latest=latestProducts.find(p=>p.id===item.id);
+if(!latest||Number(latest.stock)<item.quantity)throw new Error(`Stok ${item.name} tidak mencukupi.`)
+}
+
+for(const item of cart){
+const product=latestProducts.find(p=>p.id===item.id);
+const total=Number(item.price)*item.quantity;
+const {error:orderError}=await database.from('orders').insert({customer_name:name,customer_class:customerClass,product_name:item.name,quantity:item.quantity,total,note,status:'Baru'});
+if(orderError)throw orderError;
+const {error:updateError}=await database.from('products').update({stock:Number(product.stock)-item.quantity}).eq('id',item.id);
+if(updateError)throw updateError
+}
+
+/* PESAN WHATSAPP DENGAN EMOJI */
+let message='🍱 *PESANAN BEKAL SEKOLAH* 🍱%0A%0A';
+message+='👤 *Nama:* '+encodeURIComponent(name)+'%0A';
+message+='🏫 *Kelas:* '+encodeURIComponent(customerClass)+'%0A%0A';
+message+='🍱 *Pesanan:*%0A';
+
+cart.forEach(i=>{
+message+='🍗 '+encodeURIComponent(i.name)+' × '+i.quantity+'%0A';
+});
+
+const total=cart.reduce((s,i)=>s+i.price*i.quantity,0);
+message+='%0A💰 *Total:* Rp'+total.toLocaleString('id-ID');
+
+if(note)message+='%0A%0A📝 *Catatan:* '+encodeURIComponent(note);
+message+='%0A%0A🙏 Terima kasih!';
+
+showMessage('Pesanan berhasil disimpan! WhatsApp akan dibuka.','success');
+cart=[];renderCart();await loadProducts();
+button.textContent='✅ Pesanan Berhasil';
+
+setTimeout(()=>{
+window.open('https://wa.me/6285245570300?text='+message,'_blank');
+button.disabled=false;button.textContent='📱 Pesan Sekarang'
+},1000);
+
+}catch(e){
+console.error(e);
+showMessage('Pesanan gagal: '+e.message,'error');
+button.disabled=false;button.textContent='📱 Pesan Sekarang'
+}
+}
+
+loadProducts();
+</script>
+</body>
+</html>
