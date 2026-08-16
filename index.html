@@ -189,14 +189,22 @@ const {error:updateError}=await database.from("products").update({stock:Number(p
 if(updateError)throw updateError;
 }
 
-let message="Halo, saya mau pesan Bekal Sekolah.%0A%0A";
-message+="👤 Nama: "+encodeURIComponent(name)+"%0A";
-message+="🏫 Kelas: "+encodeURIComponent(customerClass)+"%0A%0A";
-message+="🍱 Pesanan:%0A";
-cart.forEach(i=>message+="- "+encodeURIComponent(i.name)+" x"+i.quantity+"%0A");
+const waLines=[];
+waLines.push("🍱 *PESANAN BEKAL SEKOLAH*");
+waLines.push("");
+waLines.push("👤 *Nama:* "+name);
+waLines.push("🏫 *Kelas:* "+customerClass);
+waLines.push("");
+waLines.push("📋 *DETAIL PESANAN*");
+cart.forEach(i=>waLines.push("🍱 "+i.name+" × "+i.quantity+" — Rp"+(Number(i.price)*i.quantity).toLocaleString("id-ID")));
 const total=cart.reduce((s,i)=>s+i.price*i.quantity,0);
-message+="%0A💰 Total: Rp"+total.toLocaleString("id-ID");
-if(note)message+="%0A%0A📝 Catatan: "+encodeURIComponent(note);
+waLines.push("");
+waLines.push("💰 *Total: Rp"+total.toLocaleString("id-ID")+"*");
+waLines.push("");
+waLines.push(note ? "📝 *Catatan:* "+note : "📝 *Catatan:* Tidak ada");
+waLines.push("");
+waLines.push("🙏 Terima kasih sudah memesan!");
+const message=encodeURIComponent(waLines.join("\n"));
 
 showMessage("Pesanan berhasil disimpan! WhatsApp akan dibuka.","success");
 cart=[];renderCart();await loadProducts();
