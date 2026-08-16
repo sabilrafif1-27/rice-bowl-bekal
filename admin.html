@@ -1,2734 +1,301 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Admin - Rice Bowl Bekal</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin - Bekal Sekolah</title>
 <style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    font-family:Arial,sans-serif;
-    background:#fff8ef;
-    color:#382018;
-}
-
-/* HEADER */
-
-header{
-    background:linear-gradient(
-        135deg,
-        #ff6b35,
-        #ff9f1c
-    );
-
-    color:white;
-
-    padding:20px 6%;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    box-shadow:0 3px 12px #0002;
-}
-
-.logo{
-    font-size:23px;
-    font-weight:bold;
-}
-
-.refresh{
-    border:none;
-
-    background:white;
-
-    color:#e95725;
-
-    padding:10px 16px;
-
-    border-radius:20px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-}
-
-/* CONTAINER */
-
-.container{
-    max-width:1200px;
-
-    margin:auto;
-
-    padding:30px 6%;
-}
-
-/* TITLE */
-
-.title{
-    margin-bottom:25px;
-}
-
-.title h1{
-    font-size:30px;
-}
-
-.title p{
-    margin-top:7px;
-
-    color:#777;
-}
-
-/* STATISTICS */
-
-.stats{
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(180px,1fr));
-
-    gap:18px;
-
-    margin-bottom:30px;
-}
-
-.stat{
-    background:white;
-
-    padding:20px;
-
-    border-radius:18px;
-
-    box-shadow:0 5px 20px #0002;
-}
-
-.stat-icon{
-    font-size:28px;
-}
-
-.stat-name{
-    color:#777;
-
-    margin-top:8px;
-}
-
-.stat-number{
-    font-size:27px;
-
-    font-weight:bold;
-
-    margin-top:5px;
-}
-
-/* ORDERS */
-
-.orders-box{
-    background:white;
-
-    border-radius:20px;
-
-    box-shadow:0 5px 25px #0002;
-
-    overflow:hidden;
-}
-
-.orders-header{
-    padding:20px;
-
-    border-bottom:1px solid #eee;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:15px;
-}
-
-.orders-header h2{
-    font-size:22px;
-}
-
-select{
-    padding:10px 12px;
-
-    border:1px solid #ddd;
-
-    border-radius:10px;
-
-    background:white;
-}
-
-/* ORDER CARD */
-
-.orders{
-    padding:20px;
-}
-
-.order{
-    border:1px solid #eee;
-
-    border-radius:16px;
-
-    padding:18px;
-
-    margin-bottom:15px;
-
-    background:#fff;
-}
-
-.order:last-child{
-    margin-bottom:0;
-}
-
-.order-top{
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-start;
-
-    gap:15px;
-
-    margin-bottom:12px;
-}
-
-.order-id{
-    font-weight:bold;
-
-    color:#777;
-
-    font-size:14px;
-}
-
-.customer{
-    font-size:20px;
-
-    font-weight:bold;
-
-    margin-top:4px;
-}
-
-.class{
-    color:#777;
-
-    margin-top:3px;
-}
-
-.status{
-    border:none;
-
-    padding:8px 12px;
-
-    border-radius:20px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-}
-
-.status-baru{
-    background:#fff1d6;
-
-    color:#b96b00;
-}
-
-.status-diproses{
-    background:#e4f0ff;
-
-    color:#1769aa;
-}
-
-.status-siap{
-    background:#e4f8e9;
-
-    color:#21853a;
-}
-
-.status-selesai{
-    background:#e9e9e9;
-
-    color:#555;
-}
-
-.order-details{
-    background:#fff8ef;
-
-    padding:14px;
-
-    border-radius:12px;
-
-    line-height:1.7;
-}
-
-.order-total{
-    color:#f4511e;
-
-    font-weight:bold;
-
-    font-size:18px;
-}
-
-.note{
-    margin-top:10px;
-
-    color:#555;
-}
-
-.order-bottom{
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:15px;
-
-    margin-top:14px;
-}
-
-.status-select{
-    flex:1;
-
-    max-width:250px;
-}
-
-.delete-button{
-    border:none;
-
-    background:#ffe5e5;
-
-    color:#c62828;
-
-    padding:9px 13px;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    font-weight:bold;
-}
-
-.time{
-    color:#999;
-
-    font-size:13px;
-}
-
-/* STOCK */
-
-.stock-box{
-    margin-top:30px;
-
-    background:white;
-
-    border-radius:20px;
-
-    box-shadow:0 5px 25px #0002;
-
-    overflow:hidden;
-}
-
-.stock-header{
-    padding:20px;
-
-    border-bottom:1px solid #eee;
-}
-
-.stock-list{
-    padding:20px;
-}
-
-.stock-item{
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:15px 0;
-
-    border-bottom:1px solid #eee;
-
-    gap:15px;
-}
-
-.stock-item:last-child{
-    border-bottom:none;
-}
-
-.product-name{
-    font-weight:bold;
-}
-
-.stock-number{
-    font-size:18px;
-
-    font-weight:bold;
-}
-
-.stock-habis{
-    color:#d32f2f;
-}
-
-.stock-sedikit{
-    color:#ef8c00;
-}
-
-.stock-aman{
-    color:#21853a;
-}
-
-/* EMPTY / LOADING */
-
-.loading,
-.empty{
-    text-align:center;
-
-    padding:40px;
-
-    color:#777;
-}
-
-.error{
-    text-align:center;
-
-    padding:30px;
-
-    color:#b71c1c;
-
-    background:#ffe8e8;
-
-    border-radius:12px;
-}
-
-/* MOBILE */
-
-@media(max-width:650px){
-
-    header{
-        padding:16px 5%;
-    }
-
-    .logo{
-        font-size:18px;
-    }
-
-    .container{
-        padding:25px 4%;
-    }
-
-    .title h1{
-        font-size:25px;
-    }
-
-    .orders-header{
-        flex-direction:column;
-
-        align-items:stretch;
-    }
-
-    .order-top{
-        flex-direction:column;
-    }
-
-    .order-bottom{
-        flex-direction:column;
-
-        align-items:stretch;
-    }
-
-    .status-select{
-        max-width:none;
-    }
-
-    .delete-button{
-        width:100%;
-    }
-
-}
-
-
-/* ==========================
-   KELOLA PRODUK
-========================== */
-
-.product-manage-box{
-    margin-top:30px;
-    background:white;
-    border-radius:20px;
-    box-shadow:0 5px 25px #0002;
-    overflow:hidden;
-}
-
-.product-manage-header{
-    padding:20px;
-    border-bottom:1px solid #eee;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-}
-
-.add-product-button{
-    border:none;
-    background:#ff6b35;
-    color:white;
-    padding:11px 16px;
-    border-radius:12px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.manage-list{
-    padding:20px;
-}
-
-.manage-card{
-    border:1px solid #eee;
-    border-radius:16px;
-    padding:18px;
-    margin-bottom:15px;
-    background:#fff;
-}
-
-.manage-card:last-child{
-    margin-bottom:0;
-}
-
-.manage-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:15px;
-}
-
-.manage-name{
-    font-size:20px;
-    font-weight:bold;
-}
-
-.manage-description{
-    color:#777;
-    margin-top:5px;
-    line-height:1.5;
-}
-
-.manage-price{
-    color:#f4511e;
-    font-size:18px;
-    font-weight:bold;
-    margin-top:8px;
-}
-
-.manage-stock{
-    margin-top:5px;
-    color:#555;
-}
-
-.manage-actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:15px;
-}
-
-.manage-button{
-    border:none;
-    padding:9px 12px;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.edit-product{
-    background:#e4f0ff;
-    color:#1769aa;
-}
-
-.stock-product{
-    background:#e9f9ed;
-    color:#21853a;
-}
-
-.toggle-product{
-    background:#fff1d6;
-    color:#b96b00;
-}
-
-.delete-product{
-    background:#ffe5e5;
-    color:#c62828;
-}
-
-.active-badge{
-    display:inline-block;
-    padding:6px 10px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-    background:#e9f9ed;
-    color:#21853a;
-}
-
-.inactive-badge{
-    display:inline-block;
-    padding:6px 10px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-    background:#eee;
-    color:#666;
-}
-
-/* MODAL */
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:#0008;
-    z-index:100;
-    padding:20px;
-    overflow:auto;
-}
-
-.modal.open{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.modal-content{
-    width:100%;
-    max-width:550px;
-    background:white;
-    border-radius:20px;
-    padding:25px;
-    box-shadow:0 10px 40px #0005;
-}
-
-.modal-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.modal-close{
-    border:none;
-    background:none;
-    font-size:30px;
-    cursor:pointer;
-    line-height:1;
-}
-
-.product-form label{
-    display:block;
-    font-weight:bold;
-    margin-bottom:6px;
-}
-
-.product-form input,
-.product-form textarea{
-    width:100%;
-    padding:12px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    margin-bottom:14px;
-    font-family:Arial;
-}
-
-.product-form textarea{
-    resize:vertical;
-}
-
-.form-buttons{
-    display:flex;
-    gap:10px;
-}
-
-.save-product{
-    flex:1;
-    border:none;
-    background:#25a244;
-    color:white;
-    padding:13px;
-    border-radius:12px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.cancel-product{
-    border:none;
-    background:#eee;
-    color:#444;
-    padding:13px 18px;
-    border-radius:12px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.product-image-preview{
-    width:100%;
-    height:170px;
-    object-fit:cover;
-    border-radius:12px;
-    background:#ffe2bc;
-    margin-bottom:14px;
-    display:none;
-}
-
-.product-image-preview.show{
-    display:block;
-}
-
-@media(max-width:650px){
-
-    .product-manage-header{
-        flex-direction:column;
-        align-items:stretch;
-    }
-
-    .add-product-button{
-        width:100%;
-    }
-
-    .manage-top{
-        flex-direction:column;
-    }
-
-    .manage-actions{
-        flex-direction:column;
-    }
-
-    .manage-button{
-        width:100%;
-    }
-
-    .form-buttons{
-        flex-direction:column;
-    }
-
-}
-
-
-/* ==========================
-   UPLOAD FOTO MAKANAN
-========================== */
-
-.upload-box{
-    border:2px dashed #ddd;
-    border-radius:14px;
-    padding:15px;
-    margin-bottom:14px;
-    background:#fffaf5;
-}
-
-.upload-row{
-    display:flex;
-    gap:10px;
-    align-items:center;
-    flex-wrap:wrap;
-}
-
-.upload-input{
-    flex:1;
-    min-width:220px;
-}
-
-.upload-button{
-    border:none;
-    background:#ff6b35;
-    color:white;
-    padding:11px 14px;
-    border-radius:10px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.upload-button:disabled{
-    background:#aaa;
-    cursor:not-allowed;
-}
-
-.upload-status{
-    margin-top:9px;
-    color:#666;
-    font-size:13px;
-    line-height:1.4;
-}
-
-
-/* LOGIN ADMIN */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#fff8ef;color:#382018}
+button,input,textarea,select{font:inherit}
 .login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:25px;background:linear-gradient(135deg,#ff6b35,#ff9f1c)}
-.login-card{width:100%;max-width:420px;background:white;border-radius:24px;padding:30px;box-shadow:0 15px 50px #0004}
+.login-card{width:100%;max-width:420px;background:#fff;border-radius:24px;padding:30px;box-shadow:0 15px 50px #0004}
 .login-card h1{font-size:28px;margin-bottom:8px}.login-card p{color:#777;line-height:1.5;margin-bottom:22px}
-.login-card label{display:block;font-weight:bold;margin-bottom:7px}.login-card input{width:100%;padding:13px;border:1px solid #ddd;border-radius:11px;margin-bottom:14px;font-family:Arial}
-.login-button{width:100%;border:none;background:#ff6b35;color:white;padding:14px;border-radius:12px;font-weight:bold;cursor:pointer}.login-button:disabled{background:#aaa;cursor:not-allowed}
-.login-error{display:none;margin-top:12px;padding:11px;border-radius:10px;background:#ffe8e8;color:#a52222;line-height:1.4}.login-error.show{display:block}
-#adminApp{display:none}.logout{border:none;background:#ffe5e5;color:#c62828;padding:10px 14px;border-radius:20px;font-weight:bold;cursor:pointer}.header-actions{display:flex;align-items:center;gap:10px}
-@media(max-width:650px){.header-actions{gap:6px}.header-actions .refresh,.header-actions .logout{padding:8px 10px;font-size:12px}}
+.login-card label{display:block;font-weight:bold;margin-bottom:7px}.login-card input{width:100%;padding:13px;border:1px solid #ddd;border-radius:11px;margin-bottom:14px}
+.login-button{width:100%;border:0;background:#ff6b35;color:white;padding:14px;border-radius:12px;font-weight:bold;cursor:pointer}.login-error{display:none;margin-top:12px;padding:11px;border-radius:10px;background:#ffe8e8;color:#a52222}.login-error.show{display:block}
+#adminApp{display:none}
+header{background:linear-gradient(135deg,#ff6b35,#ff9f1c);color:white;padding:20px 6%;display:flex;justify-content:space-between;align-items:center;box-shadow:0 3px 12px #0002}
+.logo{font-size:23px;font-weight:bold}.header-actions{display:flex;gap:8px}.refresh,.logout{border:none;padding:10px 16px;border-radius:20px;font-weight:bold;cursor:pointer}.refresh{background:white;color:#e95725}.logout{background:#ffe5e5;color:#c62828}
+.container{max-width:1200px;margin:auto;padding:30px 6%}.title{margin-bottom:25px}.title h1{font-size:30px}.title p{margin-top:7px;color:#777}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin-bottom:30px}.stat{background:white;padding:20px;border-radius:18px;box-shadow:0 5px 20px #0002}.stat-icon{font-size:28px}.stat-name{color:#777;margin-top:8px}.stat-number{font-size:27px;font-weight:bold;margin-top:5px}
+.orders-box,.stock-box,.product-manage-box{background:white;border-radius:20px;box-shadow:0 5px 25px #0002;overflow:hidden;margin-bottom:30px}
+.orders-header,.stock-header,.product-manage-header{padding:20px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;gap:15px}
+.orders-header h2,.stock-header h2,.product-manage-header h2{font-size:22px}
+select{padding:10px 12px;border:1px solid #ddd;border-radius:10px;background:white}
+.orders,.stock-list,.manage-list{padding:20px}
+.order{border:1px solid #eee;border-radius:16px;padding:18px;margin-bottom:15px;background:#fff}.order:last-child{margin-bottom:0}
+.order-top{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:12px}.order-id{font-weight:bold;color:#777;font-size:14px}.customer{font-size:20px;font-weight:bold;margin-top:4px}.class{color:#777;margin-top:3px}
+.status{border:none;padding:8px 12px;border-radius:20px;font-weight:bold}.status-baru{background:#fff1d6;color:#b96b00}.status-diproses{background:#e4f0ff;color:#1769aa}.status-siap{background:#e4f8e9;color:#21853a}.status-selesai{background:#e9e9e9;color:#555}
+.order-details{background:#fff8ef;padding:14px;border-radius:12px;line-height:1.7}.order-line{padding:4px 0}.order-total{color:#f4511e;font-weight:bold;font-size:18px;margin-top:8px}.note{margin-top:10px;color:#555}
+.order-bottom{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:14px}.status-select{flex:1;max-width:250px}.delete-button,.delete-all{border:none;background:#ffe5e5;color:#c62828;padding:9px 13px;border-radius:10px;cursor:pointer;font-weight:bold}.delete-all{background:#d93025;color:#fff;padding:11px 15px}
+.time{color:#999;font-size:13px}.loading,.empty{text-align:center;padding:40px;color:#777}.error{text-align:center;padding:30px;color:#b71c1c;background:#ffe8e8;border-radius:12px}
+.stock-item{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid #eee;gap:15px}.stock-item:last-child{border-bottom:none}.product-name{font-weight:bold}.stock-number{font-size:18px;font-weight:bold}.stock-habis{color:#d32f2f}.stock-sedikit{color:#ef8c00}.stock-aman{color:#21853a}
+.add-product-button{border:none;background:#ff6b35;color:white;padding:11px 16px;border-radius:12px;font-weight:bold;cursor:pointer}.manage-card{border:1px solid #eee;border-radius:16px;padding:18px;margin-bottom:15px}.manage-card:last-child{margin-bottom:0}.manage-top{display:flex;justify-content:space-between;gap:15px}.manage-name{font-size:20px;font-weight:bold}.manage-description{color:#777;margin-top:5px;line-height:1.5}.manage-price{color:#f4511e;font-size:18px;font-weight:bold;margin-top:8px}.manage-stock{margin-top:5px;color:#555}.manage-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}.manage-button{border:none;padding:9px 12px;border-radius:10px;cursor:pointer;font-weight:bold}.edit-product{background:#e4f0ff;color:#1769aa}.stock-product{background:#e9f9ed;color:#21853a}.toggle-product{background:#fff1d6;color:#b96b00}.delete-product{background:#ffe5e5;color:#c62828}.active-badge,.inactive-badge{display:inline-block;padding:6px 10px;border-radius:20px;font-size:12px;font-weight:bold}.active-badge{background:#e9f9ed;color:#21853a}.inactive-badge{background:#eee;color:#666}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:100;padding:20px;overflow:auto}.modal.open{display:flex;align-items:center;justify-content:center}.modal-content{width:100%;max-width:550px;background:white;border-radius:20px;padding:25px;box-shadow:0 10px 40px #0005}.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.modal-close{border:none;background:none;font-size:30px;cursor:pointer}.product-form label{display:block;font-weight:bold;margin-bottom:6px}.product-form input,.product-form textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-bottom:14px}.form-buttons{display:flex;gap:10px}.save-product{flex:1;border:none;background:#25a244;color:white;padding:13px;border-radius:12px;font-weight:bold}.cancel-product{border:none;background:#eee;padding:13px 18px;border-radius:12px;font-weight:bold}.upload-box{border:2px dashed #ddd;border-radius:14px;padding:15px;margin-bottom:14px;background:#fffaf5}.upload-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.upload-input{flex:1;min-width:220px}.upload-button{border:none;background:#ff6b35;color:white;padding:11px 14px;border-radius:10px;font-weight:bold}.upload-status{margin-top:9px;color:#666;font-size:13px}.product-image-preview{width:100%;height:170px;object-fit:cover;border-radius:12px;background:#ffe2bc;margin-bottom:14px;display:none}.product-image-preview.show{display:block}
+@media(max-width:650px){header{padding:16px 4%;align-items:flex-start}.logo{font-size:18px}.header-actions{gap:5px}.refresh,.logout{padding:8px 10px;font-size:12px}.container{padding:25px 4%}.title h1{font-size:25px}.orders-header,.product-manage-header{flex-direction:column;align-items:stretch}.order-top,.order-bottom,.manage-top{flex-direction:column}.status-select{max-width:none}.delete-button,.delete-all,.add-product-button{width:100%}.manage-actions{flex-direction:column}.manage-button{width:100%}.form-buttons{flex-direction:column}}
 </style>
-
 </head>
-
-
 <body>
 
-<!-- LOGIN ADMIN -->
 <div class="login-screen" id="loginScreen">
-  <div class="login-card">
-    <div style="font-size:55px; margin-bottom:10px;">🔐</div>
-    <h1>Admin Rice Bowl Bekal</h1>
-    <p>Silakan login untuk mengelola pesanan, stok, harga, dan menu.</p>
-    <form onsubmit="loginAdmin(event)">
-      <label for="loginEmail">Email</label>
-      <input id="loginEmail" type="email" placeholder="Email admin" autocomplete="username" required>
-      <label for="loginPassword">Password</label>
-      <input id="loginPassword" type="password" placeholder="Password admin" autocomplete="current-password" required>
-      <button class="login-button" id="loginButton" type="submit">🔐 Login</button>
-      <div class="login-error" id="loginError"></div>
-    </form>
-  </div>
+<div class="login-card">
+<div style="font-size:55px;margin-bottom:10px">🔐</div>
+<h1>Admin Bekal Sekolah</h1>
+<p>Login untuk mengelola pesanan, stok, harga, dan menu.</p>
+<form onsubmit="loginAdmin(event)">
+<label>Email</label><input id="loginEmail" type="email" placeholder="Email admin" autocomplete="username" required>
+<label>Password</label><input id="loginPassword" type="password" placeholder="Password admin" autocomplete="current-password" required>
+<button class="login-button" id="loginButton" type="submit">🔐 Login</button>
+<div class="login-error" id="loginError"></div>
+</form>
 </div>
+</div>
+
 <div id="adminApp">
-
-
 <header>
-
-    <div class="logo">
-        🍱 Admin Rice Bowl Bekal
-    </div>
-
-    <div class="header-actions">
-        <button class="refresh" onclick="loadAll()">🔄 Refresh</button>
-        <button class="logout" onclick="logoutAdmin()">🚪 Logout</button>
-    </div>
-
+<div class="logo">🍱 Admin Bekal Sekolah</div>
+<div class="header-actions"><button class="refresh" onclick="loadAll()">🔄 Refresh</button><button class="logout" onclick="logoutAdmin()">🚪 Logout</button></div>
 </header>
 
-
 <div class="container">
-
-
-    <div class="title">
-
-        <h1>
-            📦 Dashboard Pesanan
-        </h1>
-
-        <p>
-            Kelola pesanan dan lihat stok Rice Bowl.
-        </p>
-
-    </div>
-
-
-    <!-- STATISTIK -->
-
-    <div class="stats">
-
-        <div class="stat">
-
-            <div class="stat-icon">
-                📦
-            </div>
-
-            <div class="stat-name">
-                Total Pesanan
-            </div>
-
-            <div
-                class="stat-number"
-                id="totalOrders"
-            >
-                0
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-icon">
-                🟠
-            </div>
-
-            <div class="stat-name">
-                Pesanan Baru
-            </div>
-
-            <div
-                class="stat-number"
-                id="newOrders"
-            >
-                0
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-icon">
-                🍱
-            </div>
-
-            <div class="stat-name">
-                Sedang Diproses
-            </div>
-
-            <div
-                class="stat-number"
-                id="processingOrders"
-            >
-                0
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-icon">
-                💰
-            </div>
-
-            <div class="stat-name">
-                Total Penjualan
-            </div>
-
-            <div
-                class="stat-number"
-                id="totalSales"
-            >
-                Rp0
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- PESANAN -->
-
-    <div class="orders-box">
-
-        <div class="orders-header">
-
-            <h2>
-                📋 Daftar Pesanan
-            </h2>
-
-
-            <select
-                id="statusFilter"
-                onchange="renderOrders()"
-            >
-
-                <option value="Semua">
-                    Semua Status
-                </option>
-
-                <option value="Baru">
-                    🟠 Baru
-                </option>
-
-                <option value="Diproses">
-                    🔵 Diproses
-                </option>
-
-                <option value="Siap Diambil">
-                    🟢 Siap Diambil
-                </option>
-
-                <option value="Selesai">
-                    ⚫ Selesai
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div
-            class="orders"
-            id="orders"
-        >
-
-            <div class="loading">
-                Memuat pesanan...
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- STOK -->
-
-    <div class="stock-box">
-
-        <div class="stock-header">
-
-            <h2>
-                📊 Stok Produk
-            </h2>
-
-        </div>
-
-
-        <div
-            class="stock-list"
-            id="stockList"
-        >
-
-            <div class="loading">
-                Memuat stok...
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- KELOLA MENU -->
-
-    <div class="product-manage-box">
-
-        <div class="product-manage-header">
-
-            <h2>
-                🍱 Kelola Menu
-            </h2>
-
-            <button
-                class="add-product-button"
-                onclick="openProductModal()"
-            >
-                ➕ Tambah Menu
-            </button>
-
-        </div>
-
-        <div
-            class="manage-list"
-            id="manageList"
-        >
-            <div class="loading">
-                Memuat menu...
-            </div>
-        </div>
-
-    </div>
-
+<div class="title"><h1>📦 Dashboard Pesanan</h1><p>1 kali checkout = 1 nomor pesanan, walaupun membeli beberapa menu.</p></div>
+
+<div class="stats">
+<div class="stat"><div class="stat-icon">📦</div><div class="stat-name">Total Pesanan</div><div class="stat-number" id="totalOrders">0</div></div>
+<div class="stat"><div class="stat-icon">🟠</div><div class="stat-name">Pesanan Baru</div><div class="stat-number" id="newOrders">0</div></div>
+<div class="stat"><div class="stat-icon">🍱</div><div class="stat-name">Sedang Diproses</div><div class="stat-number" id="processingOrders">0</div></div>
+<div class="stat"><div class="stat-icon">💰</div><div class="stat-name">Total Penjualan</div><div class="stat-number" id="totalSales">Rp0</div></div>
 </div>
 
-
-<!-- MODAL PRODUK -->
-
-<div
-    class="modal"
-    id="productModal"
->
-
-    <div class="modal-content">
-
-        <div class="modal-header">
-
-            <h2 id="modalTitle">
-                ➕ Tambah Menu
-            </h2>
-
-            <button
-                class="modal-close"
-                onclick="closeProductModal()"
-            >
-                ×
-            </button>
-
-        </div>
-
-        <div class="product-form">
-
-            <input
-                type="hidden"
-                id="productId"
-            >
-
-            <label for="productName">
-                Nama Menu
-            </label>
-
-            <input
-                id="productName"
-                type="text"
-                placeholder="Contoh: Rice Bowl Ayam Geprek"
-            >
-
-            <label for="productDescription">
-                Deskripsi
-            </label>
-
-            <textarea
-                id="productDescription"
-                rows="3"
-                placeholder="Contoh: Nasi, ayam geprek, dan sambal"
-            ></textarea>
-
-            <label for="productPrice">
-                Harga
-            </label>
-
-            <input
-                id="productPrice"
-                type="number"
-                min="0"
-                placeholder="Contoh: 10000"
-            >
-
-            <label for="productStock">
-                Stok
-            </label>
-
-            <input
-                id="productStock"
-                type="number"
-                min="0"
-                placeholder="Contoh: 20"
-            >
-
-            <label>
-                Foto Makanan
-            </label>
-
-            <div class="upload-box">
-
-                <div class="upload-row">
-
-                    <input
-                        id="productImageFile"
-                        class="upload-input"
-                        type="file"
-                        accept="image/*"
-                    >
-
-                    <button
-                        type="button"
-                        class="upload-button"
-                        id="uploadImageButton"
-                        onclick="uploadProductImage()"
-                    >
-                        📷 Upload Foto
-                    </button>
-
-                </div>
-
-                <div
-                    class="upload-status"
-                    id="uploadStatus"
-                >
-                    Pilih foto makanan lalu klik Upload Foto.
-                </div>
-
-            </div>
-
-            <input
-                id="productImage"
-                type="hidden"
-            >
-
-            <img
-                id="productImagePreview"
-                class="product-image-preview"
-                alt="Preview gambar"
-            >
-
-            <div class="form-buttons">
-
-                <button
-                    class="cancel-product"
-                    onclick="closeProductModal()"
-                >
-                    Batal
-                </button>
-
-                <button
-                    class="save-product"
-                    id="saveProductButton"
-                    onclick="saveProduct()"
-                >
-                    💾 Simpan
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
+<div class="orders-box">
+<div class="orders-header">
+<h2>📋 Daftar Pesanan</h2>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<select id="statusFilter" onchange="renderOrders()"><option value="Semua">Semua Status</option><option value="Baru">🟠 Baru</option><option value="Diproses">🔵 Diproses</option><option value="Siap Diambil">🟢 Siap Diambil</option><option value="Selesai">⚫ Selesai</option></select>
+<button class="delete-all" onclick="deleteAllOrders()">🗑️ Hapus Semua</button>
+</div>
+</div>
+<div class="orders" id="orders"><div class="loading">Memuat pesanan...</div></div>
 </div>
 
+<div class="stock-box"><div class="stock-header"><h2>📊 Stok Produk</h2></div><div class="stock-list" id="stockList"><div class="loading">Memuat stok...</div></div></div>
 
-<!-- SUPABASE -->
+<div class="product-manage-box">
+<div class="product-manage-header"><h2>🍱 Kelola Menu</h2><button class="add-product-button" onclick="openProductModal()">➕ Tambah Menu</button></div>
+<div class="manage-list" id="manageList"><div class="loading">Memuat menu...</div></div>
+</div>
+</div>
+
+<div class="modal" id="productModal">
+<div class="modal-content">
+<div class="modal-header"><h2 id="modalTitle">➕ Tambah Menu</h2><button class="modal-close" onclick="closeProductModal()">×</button></div>
+<div class="product-form">
+<input type="hidden" id="productId">
+<label>Nama Menu</label><input id="productName" type="text" placeholder="Contoh: Rice Bowl Ayam Geprek">
+<label>Deskripsi</label><textarea id="productDescription" rows="3" placeholder="Contoh: Nasi, ayam geprek, dan sambal"></textarea>
+<label>Harga</label><input id="productPrice" type="number" min="0" placeholder="10000">
+<label>Stok</label><input id="productStock" type="number" min="0" placeholder="20">
+<label>Foto Makanan</label>
+<div class="upload-box"><div class="upload-row"><input id="productImageFile" class="upload-input" type="file" accept="image/*"><button type="button" class="upload-button" id="uploadImageButton" onclick="uploadProductImage()">📷 Upload Foto</button></div><div class="upload-status" id="uploadStatus">Pilih foto makanan lalu klik Upload Foto.</div></div>
+<input id="productImage" type="hidden"><img id="productImagePreview" class="product-image-preview" alt="Preview gambar">
+<div class="form-buttons"><button class="cancel-product" onclick="closeProductModal()">Batal</button><button class="save-product" id="saveProductButton" onclick="saveProduct()">💾 Simpan</button></div>
+</div>
+</div>
+</div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script src="config.js"></script>
-
-
 <script>
+const database=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+const TX_PREFIX="[[BEKAL_TX:";
+let orders=[],products=[];
 
+function getTx(note){const m=String(note||"").match(/\[\[BEKAL_TX:([^\]]+)\]\]/);return m?m[1]:null}
+function cleanNote(note){return String(note||"").replace(/\[\[BEKAL_TX:[^\]]+\]\]/g,"").trim()}
+function escapeHTML(text){return String(text??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
 
-/* ==========================
-   SUPABASE
-========================== */
+function groupOrders(rows){
+const map=new Map();
+rows.forEach(row=>{
+const tx=getTx(row.note);
+const key=tx||("legacy-"+row.id);
+if(!map.has(key))map.set(key,{tx:key,legacy:!tx,rows:[],customer_name:row.customer_name,customer_class:row.customer_class,status:row.status||"Baru",created_at:row.created_at});
+const g=map.get(key);
+g.rows.push(row);
+if(new Date(row.created_at||0)<new Date(g.created_at||0))g.created_at=row.created_at;
+});
+return [...map.values()].sort((a,b)=>new Date(b.created_at||0)-new Date(a.created_at||0));
+}
 
-const database =
-    supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-    );
-
-
-
-/* ADMIN AUTHENTICATION */
 async function loginAdmin(event){
-    event.preventDefault();
-    const email=document.getElementById("loginEmail").value.trim();
-    const password=document.getElementById("loginPassword").value;
-    const button=document.getElementById("loginButton");
-    const errorBox=document.getElementById("loginError");
-    errorBox.classList.remove("show"); errorBox.textContent="";
-    button.disabled=true; button.textContent="⏳ Login...";
-    const {error}=await database.auth.signInWithPassword({email,password});
-    if(error){
-        console.error(error); errorBox.textContent="❌ Login gagal: "+error.message; errorBox.classList.add("show");
-        button.disabled=false; button.textContent="🔐 Login"; return;
-    }
-    showAdminApp(); button.disabled=false; button.textContent="🔐 Login";
+event.preventDefault();
+const email=document.getElementById("loginEmail").value.trim(),password=document.getElementById("loginPassword").value;
+const button=document.getElementById("loginButton"),errorBox=document.getElementById("loginError");
+errorBox.classList.remove("show");button.disabled=true;button.textContent="⏳ Login...";
+const {error}=await database.auth.signInWithPassword({email,password});
+if(error){errorBox.textContent="❌ Login gagal: "+error.message;errorBox.classList.add("show");button.disabled=false;button.textContent="🔐 Login";return}
+showAdminApp();button.disabled=false;button.textContent="🔐 Login";
 }
-function showAdminApp(){document.getElementById("loginScreen").style.display="none";document.getElementById("adminApp").style.display="block";loadAll();}
-function showLoginScreen(){document.getElementById("adminApp").style.display="none";document.getElementById("loginScreen").style.display="flex";}
-async function logoutAdmin(){
-    if(!confirm("Yakin ingin logout dari admin?")) return;
-    const {error}=await database.auth.signOut();
-    if(error){alert("Gagal logout:\n"+error.message);return;}
-    showLoginScreen();
-}
-async function checkAdminSession(){
-    const {data,error}=await database.auth.getSession();
-    if(error){console.error(error);showLoginScreen();return;}
-    if(data.session) showAdminApp(); else showLoginScreen();
-}
-database.auth.onAuthStateChange(function(event,session){if(session) showAdminApp(); else showLoginScreen();});
-
-
-/* ==========================
-   DATA
-========================== */
-
-let orders = [];
-
-let products = [];
-
-
-/* ==========================
-   LOAD SEMUA DATA
-========================== */
+function showAdminApp(){document.getElementById("loginScreen").style.display="none";document.getElementById("adminApp").style.display="block";loadAll()}
+function showLoginScreen(){document.getElementById("adminApp").style.display="none";document.getElementById("loginScreen").style.display="flex"}
+async function logoutAdmin(){if(!confirm("Yakin ingin logout dari admin?"))return;const {error}=await database.auth.signOut();if(error){alert("Gagal logout:\n"+error.message);return}showLoginScreen()}
+async function checkAdminSession(){const {data}=await database.auth.getSession();if(data.session)showAdminApp();else showLoginScreen()}
+database.auth.onAuthStateChange((event,session)=>{if(session)showAdminApp();else showLoginScreen()});
 
 async function loadAll(){
-
-    document.getElementById("orders").innerHTML =
-        `<div class="loading">
-            ⏳ Memuat pesanan...
-        </div>`;
-
-
-    document.getElementById("stockList").innerHTML =
-        `<div class="loading">
-            ⏳ Memuat stok...
-        </div>`;
-
-
-    await Promise.all([
-        loadOrders(),
-        loadProducts()
-    ]);
-
+document.getElementById("orders").innerHTML='<div class="loading">⏳ Memuat pesanan...</div>';
+document.getElementById("stockList").innerHTML='<div class="loading">⏳ Memuat stok...</div>';
+await Promise.all([loadOrders(),loadProducts()]);
 }
-
-
-/* ==========================
-   LOAD ORDERS
-========================== */
 
 async function loadOrders(){
-
-    const {
-        data,
-        error
-    } =
-        await database
-        .from("orders")
-        .select("*")
-        .order("id", {
-            ascending:false
-        });
-
-
-    if(error){
-
-        console.error(error);
-
-        document.getElementById("orders").innerHTML =
-            `<div class="error">
-                ❌ Gagal mengambil pesanan.
-                <br><br>
-                ${escapeHTML(error.message)}
-            </div>`;
-
-        return;
-
-    }
-
-
-    orders = data || [];
-
-    updateStatistics();
-
-    renderOrders();
-
+const {data,error}=await database.from("orders").select("*").order("created_at",{ascending:false});
+if(error){document.getElementById("orders").innerHTML='<div class="error">❌ Gagal mengambil pesanan.<br><br>'+escapeHTML(error.message)+'</div>';return}
+orders=data||[];updateStatistics();renderOrders();
 }
-
-
-/* ==========================
-   LOAD PRODUCTS
-========================== */
 
 async function loadProducts(){
-
-    const {
-        data,
-        error
-    } =
-        await database
-        .from("products")
-        .select("*")
-        .order("id");
-
-
-    if(error){
-
-        console.error(error);
-
-        document.getElementById("stockList").innerHTML =
-            `<div class="error">
-                ❌ Gagal mengambil stok.
-                <br><br>
-                ${escapeHTML(error.message)}
-            </div>`;
-
-        return;
-
-    }
-
-
-    products = data || [];
-
-    renderStock();
-
-    renderManageProducts();
-
+const {data,error}=await database.from("products").select("*").order("id");
+if(error){document.getElementById("stockList").innerHTML='<div class="error">❌ Gagal mengambil stok.<br><br>'+escapeHTML(error.message)+'</div>';return}
+products=data||[];renderStock();renderManageProducts();
 }
-
-
-/* ==========================
-   STATISTICS
-========================== */
 
 function updateStatistics(){
-
-    const total =
-        orders.length;
-
-
-    const baru =
-        orders.filter(
-            order =>
-            order.status === "Baru"
-        ).length;
-
-
-    const diproses =
-        orders.filter(
-            order =>
-            order.status === "Diproses"
-        ).length;
-
-
-    const sales =
-        orders.reduce(
-            (sum,order) =>
-            sum + Number(order.total || 0),
-            0
-        );
-
-
-    document.getElementById(
-        "totalOrders"
-    ).textContent = total;
-
-
-    document.getElementById(
-        "newOrders"
-    ).textContent = baru;
-
-
-    document.getElementById(
-        "processingOrders"
-    ).textContent = diproses;
-
-
-    document.getElementById(
-        "totalSales"
-    ).textContent =
-        "Rp" +
-        sales.toLocaleString("id-ID");
-
+const groups=groupOrders(orders);
+document.getElementById("totalOrders").textContent=groups.length;
+document.getElementById("newOrders").textContent=groups.filter(g=>g.status==="Baru").length;
+document.getElementById("processingOrders").textContent=groups.filter(g=>g.status==="Diproses").length;
+document.getElementById("totalSales").textContent="Rp"+orders.reduce((s,o)=>s+Number(o.total||0),0).toLocaleString("id-ID");
 }
-
-
-/* ==========================
-   RENDER ORDERS
-========================== */
 
 function renderOrders(){
-
-    const container =
-        document.getElementById("orders");
-
-
-    const filter =
-        document.getElementById(
-            "statusFilter"
-        ).value;
-
-
-    let filtered =
-        orders;
-
-
-    if(filter !== "Semua"){
-
-        filtered =
-            orders.filter(
-                order =>
-                order.status === filter
-            );
-
-    }
-
-
-    if(filtered.length === 0){
-
-        container.innerHTML =
-            `<div class="empty">
-                📭 Tidak ada pesanan.
-            </div>`;
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        filtered.map(order => {
-
-            const statusClass =
-                getStatusClass(
-                    order.status
-                );
-
-
-            const time =
-                order.created_at
-                ? new Date(
-                    order.created_at
-                  ).toLocaleString(
-                    "id-ID"
-                  )
-                : "";
-
-
-            return `
-
-                <div class="order">
-
-                    <div class="order-top">
-
-                        <div>
-
-                            <div class="order-id">
-
-                                Pesanan #${order.id}
-
-                            </div>
-
-                            <div class="customer">
-
-                                ${escapeHTML(
-                                    order.customer_name
-                                )}
-
-                            </div>
-
-                            <div class="class">
-
-                                Kelas:
-                                ${escapeHTML(
-                                    order.customer_class
-                                )}
-
-                            </div>
-
-                        </div>
-
-
-                        <button
-                            class="status ${statusClass}"
-                        >
-
-                            ${getStatusIcon(
-                                order.status
-                            )}
-
-                            ${escapeHTML(
-                                order.status || "Baru"
-                            )}
-
-                        </button>
-
-                    </div>
-
-
-                    <div class="order-details">
-
-                        <div>
-
-                            🍱
-
-                            <b>
-                                ${escapeHTML(
-                                    order.product_name
-                                )}
-                            </b>
-
-                            × ${order.quantity}
-
-                        </div>
-
-
-                        <div class="order-total">
-
-                            Rp${Number(
-                                order.total || 0
-                            ).toLocaleString("id-ID")}
-
-                        </div>
-
-
-                        ${
-                            order.note
-                            ?
-                            `
-                            <div class="note">
-
-                                📝 Catatan:
-                                ${escapeHTML(
-                                    order.note
-                                )}
-
-                            </div>
-                            `
-                            :
-                            ""
-                        }
-
-                    </div>
-
-
-                    <div class="order-bottom">
-
-                        <select
-                            class="status-select"
-                            onchange="changeStatus(
-                                ${order.id},
-                                this.value
-                            )"
-                        >
-
-                            <option
-                                value="Baru"
-                                ${order.status === "Baru" ? "selected" : ""}
-                            >
-                                🟠 Baru
-                            </option>
-
-                            <option
-                                value="Diproses"
-                                ${order.status === "Diproses" ? "selected" : ""}
-                            >
-                                🔵 Diproses
-                            </option>
-
-                            <option
-                                value="Siap Diambil"
-                                ${order.status === "Siap Diambil" ? "selected" : ""}
-                            >
-                                🟢 Siap Diambil
-                            </option>
-
-                            <option
-                                value="Selesai"
-                                ${order.status === "Selesai" ? "selected" : ""}
-                            >
-                                ⚫ Selesai
-                            </option>
-
-                        </select>
-
-
-                        <div class="time">
-
-                            ${time}
-
-                        </div>
-
-
-                        <button
-                            class="delete-button"
-                            onclick="deleteOrder(${order.id})"
-                        >
-
-                            🗑 Hapus
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
-
-        }).join("");
-
+const container=document.getElementById("orders"),filter=document.getElementById("statusFilter").value;
+let groups=groupOrders(orders);
+if(filter!=="Semua")groups=groups.filter(g=>g.status===filter);
+if(!groups.length){container.innerHTML='<div class="empty">📭 Tidak ada pesanan.</div>';return}
+
+container.innerHTML=groups.map((g,index)=>{
+const statusClass=getStatusClass(g.status);
+const time=g.created_at?new Date(g.created_at).toLocaleString("id-ID"):"";
+const total=g.rows.reduce((s,r)=>s+Number(r.total||0),0);
+const items=g.rows.map(r=>`<div class="order-line">🍱 <b>${escapeHTML(r.product_name)}</b> × ${Number(r.quantity||0)}</div>`).join("");
+const note=cleanNote(g.rows.find(r=>cleanNote(r.note))?.note||"");
+const ids=JSON.stringify(g.rows.map(r=>r.id));
+const statusButtons=g.rows[0].id;
+return `<div class="order">
+<div class="order-top">
+<div><div class="order-id">Pesanan #${index+1}</div><div class="customer">👤 ${escapeHTML(g.customer_name)}</div><div class="class">🏫 Kelas: ${escapeHTML(g.customer_class)}</div></div>
+<div class="status ${statusClass}">${getStatusIcon(g.status)} ${escapeHTML(g.status)}</div>
+</div>
+<div class="order-details">${items}<div class="order-total">💰 Rp${total.toLocaleString("id-ID")}</div>${note?`<div class="note">📝 Catatan: ${escapeHTML(note)}</div>`:""}</div>
+<div class="order-bottom">
+<select class="status-select" onchange='changeGroupStatus(${JSON.stringify(g.tx)},${ids},this.value)'>
+<option value="Baru" ${g.status==="Baru"?"selected":""}>🟠 Baru</option>
+<option value="Diproses" ${g.status==="Diproses"?"selected":""}>🔵 Diproses</option>
+<option value="Siap Diambil" ${g.status==="Siap Diambil"?"selected":""}>🟢 Siap Diambil</option>
+<option value="Selesai" ${g.status==="Selesai"?"selected":""}>⚫ Selesai</option>
+</select>
+<div class="time">${time}</div>
+<button class="delete-button" onclick='deleteGroup(${JSON.stringify(g.tx)},${ids})'>🗑 Hapus</button>
+</div>
+</div>`;
+}).join("");
 }
 
-
-/* ==========================
-   CHANGE STATUS
-========================== */
-
-async function changeStatus(
-    id,
-    newStatus
-){
-
-    const {
-        error
-    } =
-        await database
-        .from("orders")
-        .update({
-
-            status:newStatus
-
-        })
-        .eq(
-            "id",
-            id
-        );
-
-
-    if(error){
-
-        console.error(error);
-
-        alert(
-            "Gagal mengubah status:\n" +
-            error.message
-        );
-
-        return;
-
-    }
-
-
-    const order =
-        orders.find(
-            item => item.id === id
-        );
-
-
-    if(order){
-
-        order.status =
-            newStatus;
-
-    }
-
-
-    updateStatistics();
-
-    renderOrders();
-
+async function changeGroupStatus(tx,ids,newStatus){
+let query=database.from("orders").update({status:newStatus});
+const {error}=tx&&!String(tx).startsWith("legacy-")?await query.like("note","%"+TX_PREFIX+tx+"]]"):await query.in("id",ids);
+if(error){alert("Gagal mengubah status:\n"+error.message);return}
+orders.forEach(o=>{if(ids.includes(o.id)||(tx&&!String(tx).startsWith("legacy-")&&getTx(o.note)===tx))o.status=newStatus});
+updateStatistics();renderOrders();
 }
 
-
-/* ==========================
-   DELETE ORDER
-========================== */
-
-async function deleteOrder(id){
-
-    const yakin =
-        confirm(
-            "Hapus pesanan #" +
-            id +
-            "?\n\n" +
-            "Data yang dihapus tidak bisa dikembalikan."
-        );
-
-
-    if(!yakin)
-        return;
-
-
-    const {
-        error
-    } =
-        await database
-        .from("orders")
-        .delete()
-        .eq(
-            "id",
-            id
-        );
-
-
-    if(error){
-
-        console.error(error);
-
-        alert(
-            "Gagal menghapus pesanan:\n" +
-            error.message
-        );
-
-        return;
-
-    }
-
-
-    orders =
-        orders.filter(
-            order =>
-            order.id !== id
-        );
-
-
-    updateStatistics();
-
-    renderOrders();
-
+async function deleteGroup(tx,ids){
+if(!confirm("Hapus seluruh menu dalam pesanan ini?\n\nData yang dihapus tidak bisa dikembalikan."))return;
+let result;
+if(tx&&!String(tx).startsWith("legacy-"))result=await database.from("orders").delete().like("note","%"+TX_PREFIX+tx+"]]");
+else result=await database.from("orders").delete().in("id",ids);
+if(result.error){alert("Gagal menghapus pesanan:\n"+result.error.message);return}
+orders=orders.filter(o=>!(ids.includes(o.id)||(tx&&!String(tx).startsWith("legacy-")&&getTx(o.note)===tx)));
+updateStatistics();renderOrders();
 }
 
-
-/* ==========================
-   RENDER STOCK
-========================== */
+async function deleteAllOrders(){
+if(!orders.length){alert("Tidak ada pesanan untuk dihapus.");return}
+if(!confirm("Yakin ingin menghapus SEMUA PESANAN?\n\nSemua transaksi dan semua menu di dalamnya akan dihapus."))return;
+const ids=orders.map(o=>o.id);
+const {error}=await database.from("orders").delete().in("id",ids);
+if(error){alert("Gagal menghapus semua pesanan:\n"+error.message);return}
+orders=[];updateStatistics();renderOrders();
+alert("✅ Semua pesanan sudah dihapus. Pesanan berikutnya akan tampil mulai #1.");
+}
 
 function renderStock(){
-
-    const container =
-        document.getElementById(
-            "stockList"
-        );
-
-
-    if(products.length === 0){
-
-        container.innerHTML =
-            `<div class="empty">
-                Belum ada produk.
-            </div>`;
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        products.map(product => {
-
-            const stock =
-                Number(product.stock);
-
-
-            let stockClass =
-                "stock-aman";
-
-
-            if(stock <= 0){
-
-                stockClass =
-                    "stock-habis";
-
-            }
-
-            else if(stock <= 5){
-
-                stockClass =
-                    "stock-sedikit";
-
-            }
-
-
-            return `
-
-                <div class="stock-item">
-
-                    <div>
-
-                        <div class="product-name">
-
-                            ${escapeHTML(
-                                product.name
-                            )}
-
-                        </div>
-
-                    </div>
-
-
-                    <div
-                        class="stock-number ${stockClass}"
-                    >
-
-                        ${stock} porsi
-
-                    </div>
-
-                </div>
-
-            `;
-
-        }).join("");
-
+const c=document.getElementById("stockList");
+if(!products.length){c.innerHTML='<div class="empty">Belum ada produk.</div>';return}
+c.innerHTML=products.map(p=>{const s=Number(p.stock);const cls=s<=0?"stock-habis":s<=5?"stock-sedikit":"stock-aman";return `<div class="stock-item"><div class="product-name">${escapeHTML(p.name)}</div><div class="stock-number ${cls}">${s} porsi</div></div>`}).join("");
 }
 
-
-
-/* ==========================
-   PRODUCT MANAGEMENT
-========================== */
-
-function openProductModal(productId = null){
-
-    const modal =
-        document.getElementById("productModal");
-
-    const title =
-        document.getElementById("modalTitle");
-
-    document.getElementById("productId").value = "";
-    document.getElementById("productName").value = "";
-    document.getElementById("productDescription").value = "";
-    document.getElementById("productPrice").value = "";
-    document.getElementById("productStock").value = "";
-    document.getElementById("productImage").value = "";
-    document.getElementById("productImageFile").value = "";
-    document.getElementById("uploadStatus").textContent =
-        "Pilih foto makanan lalu klik Upload Foto.";
-
-    const preview =
-        document.getElementById("productImagePreview");
-
-    preview.src = "";
-    preview.classList.remove("show");
-
-    if(productId !== null){
-
-        const product =
-            products.find(
-                item => Number(item.id) === Number(productId)
-            );
-
-        if(!product){
-            alert("Produk tidak ditemukan.");
-            return;
-        }
-
-        title.textContent = "✏️ Edit Menu";
-
-        document.getElementById("productId").value =
-            product.id;
-
-        document.getElementById("productName").value =
-            product.name || "";
-
-        document.getElementById("productDescription").value =
-            product.description || "";
-
-        document.getElementById("productPrice").value =
-            Number(product.price || 0);
-
-        document.getElementById("productStock").value =
-            Number(product.stock || 0);
-
-        document.getElementById("productImage").value =
-            product.image || "";
-
-        previewProductImage();
-
-    }
-
-    else{
-
-        title.textContent = "➕ Tambah Menu";
-
-    }
-
-    modal.classList.add("open");
-
+function openProductModal(productId=null){
+const modal=document.getElementById("productModal");
+["productId","productName","productDescription","productPrice","productStock","productImage"].forEach(id=>document.getElementById(id).value="");
+document.getElementById("productImageFile").value="";
+document.getElementById("uploadStatus").textContent="Pilih foto makanan lalu klik Upload Foto.";
+const preview=document.getElementById("productImagePreview");preview.src="";preview.classList.remove("show");
+if(productId!==null){
+const p=products.find(x=>Number(x.id)===Number(productId));if(!p){alert("Produk tidak ditemukan.");return}
+document.getElementById("modalTitle").textContent="✏️ Edit Menu";
+document.getElementById("productId").value=p.id;
+document.getElementById("productName").value=p.name||"";
+document.getElementById("productDescription").value=p.description||"";
+document.getElementById("productPrice").value=Number(p.price||0);
+document.getElementById("productStock").value=Number(p.stock||0);
+document.getElementById("productImage").value=p.image||"";previewProductImage();
+}else document.getElementById("modalTitle").textContent="➕ Tambah Menu";
+modal.classList.add("open");
 }
-
-
-function closeProductModal(){
-
-    document
-        .getElementById("productModal")
-        .classList.remove("open");
-
-}
-
-
-function previewProductImage(){
-
-    const input =
-        document.getElementById("productImage");
-
-    const preview =
-        document.getElementById("productImagePreview");
-
-    const value =
-        input.value.trim();
-
-    if(!value){
-
-        preview.src = "";
-        preview.classList.remove("show");
-        return;
-
-    }
-
-    preview.src = value;
-    preview.classList.add("show");
-
-    preview.onerror = function(){
-
-        preview.classList.remove("show");
-
-    };
-
-}
-
-
+function closeProductModal(){document.getElementById("productModal").classList.remove("open")}
+function previewProductImage(){const v=document.getElementById("productImage").value.trim(),p=document.getElementById("productImagePreview");if(!v){p.classList.remove("show");return}p.src=v;p.classList.add("show");p.onerror=()=>p.classList.remove("show")}
 
 async function uploadProductImage(){
-
-    const input =
-        document.getElementById("productImageFile");
-
-    const button =
-        document.getElementById("uploadImageButton");
-
-    const status =
-        document.getElementById("uploadStatus");
-
-    const preview =
-        document.getElementById("productImagePreview");
-
-    const file = input.files[0];
-
-    if(!file){
-
-        alert("Pilih foto makanan terlebih dahulu.");
-        return;
-
-    }
-
-    if(!file.type.startsWith("image/")){
-
-        alert("File harus berupa gambar.");
-        return;
-
-    }
-
-    // Batas 5 MB agar upload tetap ringan.
-    if(file.size > 5 * 1024 * 1024){
-
-        alert("Ukuran foto maksimal 5 MB.");
-        return;
-
-    }
-
-    button.disabled = true;
-    button.textContent = "⏳ Upload...";
-
-    status.textContent = "Sedang mengupload foto...";
-
-    try{
-
-        const extension =
-            file.name.split(".").pop().toLowerCase();
-
-        const safeExtension =
-            extension.replace(/[^a-z0-9]/g, "") || "jpg";
-
-        const filePath =
-            "menu-" +
-            Date.now() +
-            "-" +
-            Math.random()
-                .toString(36)
-                .substring(2,8) +
-            "." +
-            safeExtension;
-
-        const {
-            error:uploadError
-        } =
-            await database
-            .storage
-            .from("product-images")
-            .upload(
-                filePath,
-                file,
-                {
-                    cacheControl:"3600",
-                    upsert:false,
-                    contentType:file.type
-                }
-            );
-
-        if(uploadError)
-            throw uploadError;
-
-        const {
-            data:urlData
-        } =
-            database
-            .storage
-            .from("product-images")
-            .getPublicUrl(filePath);
-
-        const publicUrl =
-            urlData.publicUrl;
-
-        document.getElementById(
-            "productImage"
-        ).value = publicUrl;
-
-        preview.src = publicUrl;
-        preview.classList.add("show");
-
-        status.textContent =
-            "✅ Foto berhasil diupload.";
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-        status.textContent =
-            "❌ Upload gagal.";
-
-        alert(
-            "Gagal upload foto:\n\n" +
-            error.message +
-            "\n\nPastikan Storage bucket 'product-images' sudah dibuat dan policy upload-nya sudah diatur."
-        );
-
-    }
-
-    finally{
-
-        button.disabled = false;
-        button.textContent = "📷 Upload Foto";
-
-    }
-
+const input=document.getElementById("productImageFile"),button=document.getElementById("uploadImageButton"),status=document.getElementById("uploadStatus"),preview=document.getElementById("productImagePreview"),file=input.files[0];
+if(!file){alert("Pilih foto makanan terlebih dahulu.");return}
+if(!file.type.startsWith("image/")){alert("File harus berupa gambar.");return}
+if(file.size>5*1024*1024){alert("Ukuran foto maksimal 5 MB.");return}
+button.disabled=true;button.textContent="⏳ Upload...";status.textContent="Sedang mengupload foto...";
+try{
+const ext=(file.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"")||"jpg";
+const path="menu-"+Date.now()+"-"+Math.random().toString(36).slice(2,8)+"."+ext;
+const {error}=await database.storage.from("product-images").upload(path,file,{cacheControl:"3600",upsert:false,contentType:file.type});
+if(error)throw error;
+const {data}=database.storage.from("product-images").getPublicUrl(path);
+document.getElementById("productImage").value=data.publicUrl;preview.src=data.publicUrl;preview.classList.add("show");status.textContent="✅ Foto berhasil diupload.";
+}catch(e){status.textContent="❌ Upload gagal.";alert("Gagal upload foto:\n\n"+e.message)}finally{button.disabled=false;button.textContent="📷 Upload Foto"}
 }
-
 
 async function saveProduct(){
-
-    const id =
-        document.getElementById("productId")
-        .value;
-
-    const name =
-        document.getElementById("productName")
-        .value
-        .trim();
-
-    const description =
-        document.getElementById("productDescription")
-        .value
-        .trim();
-
-    const price =
-        Number(
-            document.getElementById("productPrice")
-            .value
-        );
-
-    const stock =
-        Number(
-            document.getElementById("productStock")
-            .value
-        );
-
-    const image =
-        document.getElementById("productImage")
-        .value
-        .trim();
-
-    const button =
-        document.getElementById(
-            "saveProductButton"
-        );
-
-    if(!name){
-
-        alert("Nama menu harus diisi.");
-        return;
-
-    }
-
-    if(!Number.isFinite(price) || price < 0){
-
-        alert("Harga tidak valid.");
-        return;
-
-    }
-
-    if(!Number.isInteger(stock) || stock < 0){
-
-        alert("Stok harus berupa angka 0 atau lebih.");
-        return;
-
-    }
-
-    button.disabled = true;
-    button.textContent = "⏳ Menyimpan...";
-
-    try{
-
-        if(id){
-
-            const {
-                data,
-                error
-            } =
-                await database
-                .from("products")
-                .update({
-
-                    name:name,
-                    description:description,
-                    price:price,
-                    stock:stock,
-                    image:image
-
-                })
-                .eq("id", Number(id))
-                .select()
-                .single();
-
-            if(error)
-                throw error;
-
-            const index =
-                products.findIndex(
-                    product =>
-                    Number(product.id) === Number(id)
-                );
-
-            if(index !== -1)
-                products[index] = data;
-
-            alert("✅ Menu berhasil diperbarui.");
-
-        }
-
-        else{
-
-            const {
-                data,
-                error
-            } =
-                await database
-                .from("products")
-                .insert({
-
-                    name:name,
-                    description:description,
-                    price:price,
-                    stock:stock,
-                    image:image || null,
-                    active:true
-
-                })
-                .select()
-                .single();
-
-            if(error)
-                throw error;
-
-            products.push(data);
-
-            products.sort(
-                (a,b) =>
-                Number(a.id) - Number(b.id)
-            );
-
-            alert("✅ Menu berhasil ditambahkan.");
-
-        }
-
-        closeProductModal();
-
-        renderStock();
-
-        renderManageProducts();
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-        alert(
-            "❌ Gagal menyimpan menu:\n\n" +
-            error.message
-        );
-
-    }
-
-    finally{
-
-        button.disabled = false;
-        button.textContent = "💾 Simpan";
-
-    }
-
+const id=document.getElementById("productId").value,name=document.getElementById("productName").value.trim(),description=document.getElementById("productDescription").value.trim(),price=Number(document.getElementById("productPrice").value),stock=Number(document.getElementById("productStock").value),image=document.getElementById("productImage").value.trim(),button=document.getElementById("saveProductButton");
+if(!name){alert("Nama menu harus diisi.");return}if(!Number.isFinite(price)||price<0){alert("Harga tidak valid.");return}if(!Number.isInteger(stock)||stock<0){alert("Stok harus berupa angka 0 atau lebih.");return}
+button.disabled=true;button.textContent="⏳ Menyimpan...";
+try{
+if(id){const {data,error}=await database.from("products").update({name,description,price,stock,image}).eq("id",Number(id)).select().single();if(error)throw error;const i=products.findIndex(p=>Number(p.id)===Number(id));if(i>=0)products[i]=data;alert("✅ Menu berhasil diperbarui.")}
+else{const {data,error}=await database.from("products").insert({name,description,price,stock,image:image||null,active:true}).select().single();if(error)throw error;products.push(data);products.sort((a,b)=>Number(a.id)-Number(b.id));alert("✅ Menu berhasil ditambahkan.")}
+closeProductModal();renderStock();renderManageProducts();
+}catch(e){alert("❌ Gagal menyimpan menu:\n\n"+e.message)}finally{button.disabled=false;button.textContent="💾 Simpan"}
 }
-
-
-async function addStock(productId){
-
-    const product =
-        products.find(
-            item =>
-            Number(item.id) === Number(productId)
-        );
-
-    if(!product)
-        return;
-
-    const jumlah =
-        prompt(
-            "Tambah berapa stok untuk " +
-            product.name +
-            "?\n\nStok sekarang: " +
-            Number(product.stock)
-        );
-
-    if(jumlah === null)
-        return;
-
-    const amount =
-        Number(jumlah);
-
-    if(!Number.isInteger(amount) || amount <= 0){
-
-        alert("Masukkan jumlah stok berupa angka lebih dari 0.");
-        return;
-
-    }
-
-    await updateProductStock(
-        productId,
-        Number(product.stock) + amount
-    );
-
-}
-
-
-async function setStock(productId){
-
-    const product =
-        products.find(
-            item =>
-            Number(item.id) === Number(productId)
-        );
-
-    if(!product)
-        return;
-
-    const value =
-        prompt(
-            "Masukkan stok baru untuk " +
-            product.name,
-            Number(product.stock)
-        );
-
-    if(value === null)
-        return;
-
-    const stock =
-        Number(value);
-
-    if(!Number.isInteger(stock) || stock < 0){
-
-        alert("Stok harus berupa angka 0 atau lebih.");
-        return;
-
-    }
-
-    await updateProductStock(
-        productId,
-        stock
-    );
-
-}
-
-
-async function updateProductStock(
-    productId,
-    stock
-){
-
-    const {
-        error
-    } =
-        await database
-        .from("products")
-        .update({
-            stock:stock
-        })
-        .eq(
-            "id",
-            Number(productId)
-        );
-
-    if(error){
-
-        console.error(error);
-
-        alert(
-            "❌ Gagal mengubah stok:\n\n" +
-            error.message
-        );
-
-        return;
-
-    }
-
-    const product =
-        products.find(
-            item =>
-            Number(item.id) === Number(productId)
-        );
-
-    if(product)
-        product.stock = stock;
-
-    renderStock();
-    renderManageProducts();
-
-}
-
-
-async function toggleProduct(productId){
-
-    const product =
-        products.find(
-            item =>
-            Number(item.id) === Number(productId)
-        );
-
-    if(!product)
-        return;
-
-    const newActive =
-        product.active !== true;
-
-    const action =
-        newActive
-        ? "mengaktifkan"
-        : "menonaktifkan";
-
-    const yakin =
-        confirm(
-            "Yakin ingin " +
-            action +
-            " menu " +
-            product.name +
-            "?"
-        );
-
-    if(!yakin)
-        return;
-
-    const {
-        error
-    } =
-        await database
-        .from("products")
-        .update({
-            active:newActive
-        })
-        .eq(
-            "id",
-            Number(productId)
-        );
-
-    if(error){
-
-        console.error(error);
-
-        alert(
-            "❌ Gagal mengubah status menu:\n\n" +
-            error.message
-        );
-
-        return;
-
-    }
-
-    product.active = newActive;
-
-    renderManageProducts();
-
-}
-
-
-async function deleteProduct(productId){
-
-    const product =
-        products.find(
-            item =>
-            Number(item.id) === Number(productId)
-        );
-
-    if(!product)
-        return;
-
-    const yakin =
-        confirm(
-            "Hapus menu \"" +
-            product.name +
-            "\"?\n\n" +
-            "Data menu akan dihapus permanen."
-        );
-
-    if(!yakin)
-        return;
-
-    const {
-        error
-    } =
-        await database
-        .from("products")
-        .delete()
-        .eq(
-            "id",
-            Number(productId)
-        );
-
-    if(error){
-
-        console.error(error);
-
-        alert(
-            "❌ Gagal menghapus menu:\n\n" +
-            error.message
-        );
-
-        return;
-
-    }
-
-    products =
-        products.filter(
-            item =>
-            Number(item.id) !== Number(productId)
-        );
-
-    renderStock();
-    renderManageProducts();
-
-    alert("✅ Menu berhasil dihapus.");
-
-}
-
-
+async function addStock(id){const p=products.find(x=>Number(x.id)===Number(id));if(!p)return;const v=prompt("Tambah stok untuk "+p.name+".\nStok sekarang: "+p.stock);if(v===null)return;const n=Number(v);if(!Number.isInteger(n)||n<=0){alert("Masukkan angka lebih dari 0.");return}updateProductStock(id,Number(p.stock)+n)}
+async function setStock(id){const p=products.find(x=>Number(x.id)===Number(id));if(!p)return;const v=prompt("Stok baru untuk "+p.name,Number(p.stock));if(v===null)return;const n=Number(v);if(!Number.isInteger(n)||n<0){alert("Stok harus 0 atau lebih.");return}updateProductStock(id,n)}
+async function updateProductStock(id,stock){const {error}=await database.from("products").update({stock}).eq("id",Number(id));if(error){alert("Gagal mengubah stok:\n"+error.message);return}const p=products.find(x=>Number(x.id)===Number(id));if(p)p.stock=stock;renderStock();renderManageProducts()}
+async function toggleProduct(id){const p=products.find(x=>Number(x.id)===Number(id));if(!p)return;const active=p.active!==true;if(!confirm("Yakin ingin "+(active?"mengaktifkan ":"menonaktifkan ")+p.name+"?"))return;const {error}=await database.from("products").update({active}).eq("id",Number(id));if(error){alert("Gagal mengubah status:\n"+error.message);return}p.active=active;renderManageProducts()}
+async function deleteProduct(id){const p=products.find(x=>Number(x.id)===Number(id));if(!p)return;if(!confirm("Hapus menu \""+p.name+"\"?\n\nData menu akan dihapus permanen."))return;const {error}=await database.from("products").delete().eq("id",Number(id));if(error){alert("Gagal menghapus menu:\n"+error.message);return}products=products.filter(x=>Number(x.id)!==Number(id));renderStock();renderManageProducts();alert("✅ Menu berhasil dihapus.")}
 function renderManageProducts(){
-
-    const container =
-        document.getElementById("manageList");
-
-    if(!container)
-        return;
-
-    if(products.length === 0){
-
-        container.innerHTML =
-            `<div class="empty">
-                Belum ada menu.
-            </div>`;
-
-        return;
-
-    }
-
-    container.innerHTML =
-        products.map(product => {
-
-            const active =
-                product.active === true;
-
-            return `
-
-                <div class="manage-card">
-
-                    <div class="manage-top">
-
-                        <div>
-
-                            <div class="manage-name">
-
-                                ${escapeHTML(
-                                    product.name
-                                )}
-
-                            </div>
-
-                            <div class="manage-description">
-
-                                ${escapeHTML(
-                                    product.description || "Tidak ada deskripsi."
-                                )}
-
-                            </div>
-
-                            <div class="manage-price">
-
-                                Rp${Number(
-                                    product.price || 0
-                                ).toLocaleString("id-ID")}
-
-                            </div>
-
-                            <div class="manage-stock">
-
-                                📦 Stok:
-                                <b>
-                                    ${Number(product.stock || 0)}
-                                </b>
-                                porsi
-
-                            </div>
-
-                        </div>
-
-                        <div>
-
-                            ${
-                                active
-                                ?
-                                `<span class="active-badge">
-                                    🟢 Aktif
-                                </span>`
-                                :
-                                `<span class="inactive-badge">
-                                    ⚫ Nonaktif
-                                </span>`
-                            }
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="manage-actions">
-
-                        <button
-                            class="manage-button edit-product"
-                            onclick="openProductModal(${product.id})"
-                        >
-                            ✏️ Edit Menu
-                        </button>
-
-                        <button
-                            class="manage-button stock-product"
-                            onclick="addStock(${product.id})"
-                        >
-                            ➕ Tambah Stok
-                        </button>
-
-                        <button
-                            class="manage-button stock-product"
-                            onclick="setStock(${product.id})"
-                        >
-                            📦 Ubah Stok
-                        </button>
-
-                        <button
-                            class="manage-button toggle-product"
-                            onclick="toggleProduct(${product.id})"
-                        >
-                            ${
-                                active
-                                ? "⚫ Nonaktifkan"
-                                : "🟢 Aktifkan"
-                            }
-                        </button>
-
-                        <button
-                            class="manage-button delete-product"
-                            onclick="deleteProduct(${product.id})"
-                        >
-                            🗑 Hapus Menu
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
-
-        }).join("");
-
+const c=document.getElementById("manageList");if(!products.length){c.innerHTML='<div class="empty">Belum ada menu.</div>';return}
+c.innerHTML=products.map(p=>{const active=p.active===true;return `<div class="manage-card"><div class="manage-top"><div><div class="manage-name">${escapeHTML(p.name)}</div><div class="manage-description">${escapeHTML(p.description||"Tidak ada deskripsi.")}</div><div class="manage-price">Rp${Number(p.price||0).toLocaleString("id-ID")}</div><div class="manage-stock">📦 Stok: <b>${Number(p.stock||0)}</b> porsi</div></div><div>${active?'<span class="active-badge">🟢 Aktif</span>':'<span class="inactive-badge">⚫ Nonaktif</span>'}</div></div><div class="manage-actions"><button class="manage-button edit-product" onclick="openProductModal(${p.id})">✏️ Edit Menu</button><button class="manage-button stock-product" onclick="addStock(${p.id})">➕ Tambah Stok</button><button class="manage-button stock-product" onclick="setStock(${p.id})">📦 Ubah Stok</button><button class="manage-button toggle-product" onclick="toggleProduct(${p.id})">${active?"⚫ Nonaktifkan":"🟢 Aktifkan"}</button><button class="manage-button delete-product" onclick="deleteProduct(${p.id})">🗑 Hapus Menu</button></div></div>`}).join("");
 }
-
-
-/* ==========================
-   STATUS CLASS
-========================== */
-
-function getStatusClass(status){
-
-    if(status === "Diproses")
-        return "status-diproses";
-
-
-    if(status === "Siap Diambil")
-        return "status-siap";
-
-
-    if(status === "Selesai")
-        return "status-selesai";
-
-
-    return "status-baru";
-
-}
-
-
-/* ==========================
-   STATUS ICON
-========================== */
-
-function getStatusIcon(status){
-
-    if(status === "Diproses")
-        return "🔵";
-
-
-    if(status === "Siap Diambil")
-        return "🟢";
-
-
-    if(status === "Selesai")
-        return "⚫";
-
-
-    return "🟠";
-
-}
-
-
-/* ==========================
-   SECURITY
-========================== */
-
-function escapeHTML(text){
-
-    return String(text ?? "")
-        .replace(
-            /[&<>"']/g,
-            function(char){
-
-                const chars = {
-
-                    "&":"&amp;",
-                    "<":"&lt;",
-                    ">":"&gt;",
-                    '"':"&quot;",
-                    "'":"&#039;"
-
-                };
-
-                return chars[char];
-
-            }
-        );
-
-}
-
-
-/* ==========================
-   START
-========================== */
-
+function getStatusClass(s){if(s==="Diproses")return"status-diproses";if(s==="Siap Diambil")return"status-siap";if(s==="Selesai")return"status-selesai";return"status-baru"}
+function getStatusIcon(s){if(s==="Diproses")return"🔵";if(s==="Siap Diambil")return"🟢";if(s==="Selesai")return"⚫";return"🟠"}
 checkAdminSession();
-
 </script>
-
-
 </body>
-
 </html>
